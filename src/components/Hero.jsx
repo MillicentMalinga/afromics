@@ -1,12 +1,11 @@
 import React from 'react'
 import HeroImage from '../assets/images/scientists.png'
-import { Link } from 'react-router-dom'
 
 function Hero() {
   return (
     <div>
-        <div className="flex sm:flex-col-reverse lg:flex-row lg:mx-16 sm:mx-8 mt-8">
-            <div className="w-1/2 lg:mx-4 self-center justify-self-center">
+        <div className="flex sm:flex-col-reverse lg:flex-row lg:mx-16 sm:mx-2 mt-8">
+            <div className="lg:w-1/2 sm:w-4/5 lg:mx-4 self-center justify-self-center">
             
 <p className="text-4xl font-body-plex text-left self-center">
   We are leveraging the of the cloud to accelerate genomics research in Africa
@@ -16,7 +15,7 @@ function Hero() {
 
 
             </div>
-            <div className="w-1/2">
+            <div className="lg:w-1/2 sm:w-4/5 sm:self-center">
                 <img className='rounded-xl' src={HeroImage} alt="AfroMics" />
             </div>
         </div>

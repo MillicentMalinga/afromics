@@ -128,8 +128,8 @@ function CustomNav() {
             <Button fullWidth  size="sm" className="font-body-plex bg-blue-gray-500">
               <span>Organisations</span>
             </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
+            <Button fullWidth size="sm" className="bg-white font-body-plex text-blue-gray-800">
+              <span>Researchers</span>
             </Button>
           </div>
         </MobileNav>

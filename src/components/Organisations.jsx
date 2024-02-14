@@ -85,7 +85,7 @@ function Organisations() {
       Pricing
       </p>
 
-<div className="lg:mx-16 my-8 py-10 grid lg:grid-cols-3 sm:grid-cols-1">
+<div className="lg:mx-16 sm:mx-4 sm:gap-8 my-8 py-10 grid lg:grid-cols-3 sm:grid-cols-1">
 <Card  variant="gradient" className="w-full max-w-[20rem] p-8 bg-blue-gray-500">
       <CardHeader
         floated={false}

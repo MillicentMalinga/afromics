@@ -50,7 +50,7 @@ function Organisations() {
         />
       </CardHeader>
       <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2 font-body-plex">
+        <Typography variant="h5" color="blue-gray" className="mb-2 font-body-plex text-left">
           Collaboration
         </Typography>
         <Typography className='font-body-plex text-left'>

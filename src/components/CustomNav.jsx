@@ -91,7 +91,7 @@ function CustomNav() {
             </div>
             <IconButton
               
-              className="ml-auto h-6 w-6 bg-blue-gray-500 text-black lg:hidden"
+              className="ml-auto h-6 w-6 bg-blue-gray-50 text-black lg:hidden"
               ripple={false}
               onClick={() => setOpenNav(!openNav)}
             >

@@ -4,7 +4,7 @@ import About from './components/About';
 import CustomNav from './components/CustomNav';
 import { Route, BrowserRouter as Router} from 'react-router-dom';
 import Hero from './components/Hero';
-import Researchers from './components/Researchers';
+import Register from './components/Register';
 import Organisations from './components/Organisations';
 import Landing from './pages/Landing';
 
@@ -12,8 +12,7 @@ function App() {
   <Router>
     <Route path='/contact' component={ContactUs} />
     <Route path='/about' component={About} />
-    <Route path='/products' component={Researchers} />
-    <Route path="/researchers" component={Researchers} />
+    <Route path="/register" component={Register} />
     <Route path="/organisations" component={Organisations} /> 
     </Router>
   return (

@@ -3,6 +3,9 @@ import CustomNav from '../components/CustomNav'
 import Hero from '../components/Hero'
 import Organisations from '../components/Organisations'
 import Features from '../components/Features'
+import Footer from '../components/Footer'
+import { FrequentQuestions } from '../components/FAQs'
+import ContactUs from '../components/ContactUs'
 
 
 function Landing() {
@@ -13,7 +16,9 @@ function Landing() {
 
       <Organisations id="organisations"/>
       <Features id="features"/>
-      {/* <Researchers  id="researchers"/> */}
+      <FrequentQuestions />
+      <ContactUs  className=""/>
+      <Footer />
     </div>
   )
 }

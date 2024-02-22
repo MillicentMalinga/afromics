@@ -1,9 +1,7 @@
 import './App.css';
 import ContactUs from './components/ContactUs';
 import About from './components/About';
-import CustomNav from './components/CustomNav';
 import { Route, BrowserRouter as Router} from 'react-router-dom';
-import Hero from './components/Hero';
 import Register from './components/Register';
 import Organisations from './components/Organisations';
 import Landing from './pages/Landing';

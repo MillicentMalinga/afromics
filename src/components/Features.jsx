@@ -4,7 +4,6 @@ import  IAM from '../assets/images/aws-iam-identity-and-access-management.svg'
 import  Lambda from '../assets/images/compute-aws-lambda-lambdafunction.svg'
 import Cognito from '../assets/images/aws-cognito.svg'
 import IconCard from './IconCard'
-import { Link } from 'react-router-dom'
 
 
 

@@ -28,10 +28,11 @@ function CustomNav() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/products" className="flex items-center font-body-plex text-md text-blue-gray-900">
-          Products
+        <a href="/blog" className="flex items-center font-body-plex text-md text-blue-gray-900">
+          Blog
         </a>
       </Typography>
+      
       <Typography
         as="li"
         variant="small"
@@ -57,7 +58,7 @@ function CustomNav() {
   );
  
   return (
-    <div className="-m-6 p-5 overflow-hidden">
+    <div className="-m-6 p-5 overflow-hidden sticky">
       <Navbar className="sticky top-0 z-10 h-max max-w-full bg-inherit rounded-none px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography

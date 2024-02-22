@@ -36,7 +36,7 @@ function Organisations() {
       <h1 className='font-body-plex text-2xl font-medium text-blue-gray-800 mb-20'>
       Our Services
       </h1>
-      <div className="grid lg:mx-auto my-10 sm:mx-auto w-4/5 gap-8 lg:grid-cols-3 lg:grid-rows-1 sm:grid-cols-1">
+      <div className="grid lg:mx-auto my-10 sm:mx-auto w-4/5 sm:gap-y-14 lg:gap-8 lg:grid-cols-3 lg:grid-rows-1 sm:grid-cols-1">
 
 {    services.map((service, index) => (
       <CustomCard key={index} title={service.title} description={service.description} image={service.image} /> 

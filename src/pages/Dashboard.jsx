@@ -27,7 +27,7 @@ function Dashboard() {
 
 </form>
 
-<div className="flex flex-row gap-4 w-3/5 self-center mx-auto">
+<div className="flex flex-row gap-4 lg:w-3/5 sm:w-4/5 self-center mx-auto">
   <DashTabs />
 </div>
 

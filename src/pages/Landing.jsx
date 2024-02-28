@@ -17,7 +17,7 @@ function Landing() {
       <Organisations id="organisations"/>
       <Features id="features"/>
       <FrequentQuestions />
-      <ContactUs  className=""/>
+      <ContactUs />
       <Footer />
     </div>
   )

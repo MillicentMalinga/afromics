@@ -22,7 +22,7 @@ import {
         </PopoverHandler>
         <PopoverContent className="w-72 bg-blue-gray-100 text-blue-gray-900">
           <List className="p-0 font-body-plex">
-            <Link to="datasets/new" className="text-initial font-medium ">
+            <Link to="/datasets/new" className="text-initial font-medium ">
               <ListItem>
                 <ListItemPrefix>
                   <FontAwesomeIcon icon={faFile} />

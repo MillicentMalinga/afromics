@@ -2,9 +2,7 @@ import {
     Popover,
     PopoverHandler,
     PopoverContent,
-    Avatar,
-    Button,
-    Typography,
+    
     List,
     ListItem,
     ListItemPrefix,
@@ -12,7 +10,7 @@ import {
   import { Link } from "react-router-dom";
    
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-  import { faBlog, faBriefcase, faFile, faPlus } from "@fortawesome/free-solid-svg-icons";
+  import { faBlog, faBriefcase, faFile,  } from "@fortawesome/free-solid-svg-icons";
 
   export default function CreateMenu() {
     return (
@@ -22,7 +20,7 @@ import {
             
             CREATE</button>
         </PopoverHandler>
-        <PopoverContent className="w-72">
+        <PopoverContent className="w-72 bg-blue-gray-200">
           <List className="p-0 font-body-plex">
             <Link to="datasets/new" className="text-initial font-medium text-blue-gray-500">
               <ListItem>

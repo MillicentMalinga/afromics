@@ -115,7 +115,7 @@ function CustomNav() {
               <span>Organisations</span>
             </Button>
             </Link>
-            <Link to="#researchers">
+            <Link to="/researchers">
             <Button fullWidth size="sm" className="bg-white font-body-plex text-blue-gray-800">
               <span>Researchers</span>
             </Button>

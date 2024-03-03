@@ -6,6 +6,7 @@ module.exports = withMT({
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+   
     screens: {
      
       'sm': '100px',

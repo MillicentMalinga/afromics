@@ -10,7 +10,7 @@ import ContactUs from '../components/ContactUs'
 
 function Landing() {
   return (
-    <div>
+    <div className="bg-blue-gray-50">
       <CustomNav />
       <Hero />
 

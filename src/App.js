@@ -6,7 +6,9 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-
+import Researchers from './components/Researchers';
+import Work from './components/Work'
+import Profile from './components/Profile'
 function App() {
  
   return (
@@ -16,10 +18,13 @@ function App() {
     <Routes>
 
     <Route path='/about' component={< About />} />
-    <Route path="/researchers" element={< Dashboard />} />
+    <Route path="/researchers" element={<Researchers />} />
     <Route path="/register" element={< SignUp />} />
     <Route path="/" element={<Landing/>} />
     <Route path="/login" element={<SignIn/>} />
+    <Route path="/work" element={<Work />} />
+    <Route path="/profile" element={<Profile />} />
+
     
     </Routes>
     </div>

@@ -23,7 +23,7 @@ function Sidebar(props) {
  
   return (
     <React.Fragment>
-      <button className="mx-8  font-logo uppercase" onClick={openDrawer}><FontAwesomeIcon className="mr-2" icon={props.header} size={props.size} /></button>
+      <button className="mx-8  font-logo uppercase" onClick={openDrawer}><FontAwesomeIcon className="mr-2 place-self-center mt-2" icon={props.header} size={props.size} /></button>
       <Drawer placement={props.placement} open={open} onClose={closeDrawer}>
         <div className="mb-2 flex items-center justify-between p-4">
           <Typography variant="h5" color="blue-gray" className="font-logo">

@@ -9,6 +9,8 @@ import SignIn from './components/SignIn';
 import Researchers from './components/Researchers';
 import Work from './components/Work'
 import Profile from './components/Profile'
+import Datasets from './components/Datasets';
+import NewData from './components/NewData';
 function App() {
  
   return (
@@ -24,6 +26,9 @@ function App() {
     <Route path="/login" element={<SignIn/>} />
     <Route path="/work" element={<Work />} />
     <Route path="/profile" element={<Profile />} />
+    <Route path="/datasets" element={<Datasets />} />
+    <Route path="/datasets/new" element={<NewData />} />
+
 
     
     </Routes>

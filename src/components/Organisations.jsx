@@ -3,6 +3,8 @@ import Secure from '../assets/images/secure-data.png'
 import Collaboration from '../assets/images/collaboration.jpg'
 import UserMana from '../assets/images/collab.png'
 import CustomCard from './CustomCard';
+import Collab from '../assets/images/collab.png';
+import CustomNav  from './CustomNav';
 
 
 // List of services offered to organisations
@@ -29,25 +31,31 @@ const services = [
 
 function Organisations() {
   return (
-    <div className='bg-white py-10 '>
-      <p className='font-body-plex text-blue-gray-600 lg:text-center text-xs font-semibold uppercase'>
-      What We Offer
-      </p>
-      <h1 className='font-body-plex text-2xl font-medium lg:text-center text-blue-gray-800 mb-20'>
-      Our Services
-      </h1>
-      <div className="grid lg:mx-auto my-10 sm:mx-auto w-4/5 sm:gap-y-14 lg:gap-8 lg:grid-cols-3 lg:grid-rows-1 sm:grid-cols-1">
-
-{    services.map((service, index) => (
-      <CustomCard key={index} title={service.title} description={service.description} image={service.image} /> 
-    ))
-}
-
-
-         
-      </div>
-
+    <div className="bg-blue-gray-100">
+      <CustomNav buttonText="Contact Sales"/>
+      <div className='flex flex-col place-content-center my-10 lg:py-10 sm:py-10'>
       
+      <div className='w-4/5 mx-auto flex flex-col gap-4'>
+        <div className='flex lg:flex-row sm:flex-col gap-8'>
+          <img src={Collab} alt="" className='lg:w-2/3 sm:w-full rounded-b-full rounded-t-full' />
+          <div className='self-center mx-4'>
+          <h1 className='font-body-plex lg:text-4xl sm:text-2xl'> </h1>
+        <p className="font-body-plex">
+          We are excited to have you back. Find your next research opportunity, connect with other researchers and explore new datasets.
+        </p>
+     
+          </div>
+          <div  className="">
+        
+        </div>
+        </div>
+        
+    
+        
+        
+      </div>
+    </div>
+
     </div>
   )
 }

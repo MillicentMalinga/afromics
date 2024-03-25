@@ -2,11 +2,12 @@ import {faUser, faHome, faDatabase, faGear,  faFile, faComment, faBriefcase, faB
 import Search from './Search'
 import CreateMenu from './CreateMenu'
 import Sidebar from './Sidebar'
+import { UserAuth } from '../context/authContext'
 
 
 
 function HeroResearch(){
-  
+const {logout} = UserAuth();
     const data = [
       {
     
@@ -25,9 +26,9 @@ function HeroResearch(){
         link: '/papers'
       },
       {
-        title: 'Discussions',
+        title: 'Courses',
         icon: faComment,
-        link: '/discussions'
+        link: '/courses'
       },
       {
         title: 'Opportunities',
@@ -56,12 +57,6 @@ function HeroResearch(){
         title: 'Settings',
         icon: faGear,
         link: '/settings'
-      },
-     
-      {
-        title: 'SignOut',
-        icon: faRightFromBracket,
-        link: '/signout'
       }
     ]
     return(

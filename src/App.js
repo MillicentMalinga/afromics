@@ -11,6 +11,10 @@ import Work from './components/Work'
 import Profile from './components/Profile'
 import Datasets from './components/Datasets';
 import NewData from './components/NewData';
+import ProtectedRoute from './components/protectedRoute';
+import Projects from './components/Projects';
+import Courses from './components/Courses';
+import Organisations from './components/Organisations';
 function App() {
  
   return (
@@ -18,16 +22,21 @@ function App() {
 
  
     <Routes>
-
-    <Route path='/about' component={< About />} />
-    <Route path="/researchers" element={<Researchers />} />
-    <Route path="/register" element={< SignUp />} />
     <Route path="/" element={<Landing/>} />
     <Route path="/login" element={<SignIn/>} />
-    <Route path="/work" element={<Work />} />
-    <Route path="/profile" element={<Profile />} />
-    <Route path="/datasets" element={<Datasets />} />
-    <Route path="/datasets/new" element={<NewData />} />
+    <Route path='/about' component={< About />} />
+    <Route path="/register" element={< SignUp />} />
+    <Route path='/courses' element={<Courses />} />
+    <Route path="/organisations" element={<Organisations />} />
+    
+    <Route path="/researchers" element={<ProtectedRoute><Researchers /></ProtectedRoute>} />
+    <Route path="/work" element={<ProtectedRoute><Work /></ProtectedRoute>} />
+    <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+    <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+    <Route path="/datasets" element={<ProtectedRoute><Datasets /></ProtectedRoute>} />
+    <Route path="/datasets/new" element={<ProtectedRoute><NewData /></ProtectedRoute>} />
+    
+   
 
 
     

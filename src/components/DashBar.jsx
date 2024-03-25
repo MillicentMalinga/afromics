@@ -6,43 +6,32 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
- 
-const data = [
-    {
-        title: "Blog",
-        link: "/blog",
-    },
-    { 
-        title: "Organisations", 
-        link: "/organisations"
-        
-    }, 
-    {
-        title: "Account", 
-        link: "/account"
-    }
-]
-function NavList() {
+import { Link } from "react-router-dom";
+
+function NavList(props) {
   return (
-    <ul className="my-2 flex flex-col gap-2  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-        {data.map((item, index) => (
-            <Typography
-            key={index}
-            as="li"
-            variant="small"
-            color="blue-gray"
-            className="p-1 font-normal font-body-plex"
-            >
-            <a href={item.link} className="flex items-center font-body-plex text-md text-blue-gray-900">
-                {item.title}
-            </a>
-            </Typography>
-        ))}
+    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        {
+            props.linkList.map((link) => (
+                <Typography
+                    as="li"
+                    variant="small"
+                    color="blue-gray"
+                    className="p-1 font-medium font-body-plex cursor-pointer hover:text-blue-500"
+                >
+                    <Link to={link.url} className="flex items-center hover:text-blue-500 transition-colors">
+                        {link.name}
+                    </Link>
+                </Typography>
+            ))
+        }
+  
+
     </ul>
   );
 }
  
-export function DashBar() {
+export function DashBar(props) {
   const [openNav, setOpenNav] = React.useState(false);
  
   const handleWindowResize = () =>
@@ -63,12 +52,12 @@ export function DashBar() {
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer font-logo py-1.5"
+          className="mr-4 cursor-pointer py-1.5 font-logo"
         >
-         Afromics
+          Afromics
         </Typography>
         <div className="hidden lg:block">
-          <NavList />
+          <NavList  linkList={props.linkList} />
         </div>
         <IconButton
           variant="text"
@@ -84,7 +73,7 @@ export function DashBar() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <NavList linkList={props.linkList} />
       </Collapse>
     </Navbar>
   );

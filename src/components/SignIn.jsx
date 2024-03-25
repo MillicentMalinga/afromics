@@ -1,21 +1,30 @@
 import React from 'react'
 import {useState }  from 'react'
-import {Link } from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { signInWithEmailAndPassword } from '@firebase/auth'
+import { UserAuth } from '../context/authContext'
 
-function SignUp() {
+
+function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { signIn } = UserAuth();
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-   console.log('Form Submitted')
-    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('')
+    try {
+      await signIn(email, password)
+      navigate('/researchers')
+    } catch (e) {
+      setError(e.message)
     }
-
+  };
   return (
    <div className="bg-blue-gray-50 w-4/5 flex flex-col content-center justify-around h-screen m-auto">
  <Link to="/" className='font-body-plex text-blue-gray-700'> <FontAwesomeIcon icon={faArrowLeft} className='me-2' />   
@@ -44,11 +53,11 @@ function SignUp() {
 
         {/* Submit button */}
 <input type="submit" value="Login" className='bg-blue-gray-600 uppercase font-body-plex font-semibold text-white rounded-lg self-center w-1/2 py-4'/>
-
-{/* <p className='bg-green-600 px-4 py-2 text-green-800 font-body-plex font-semibold'>
+{error &&
+<p className='px-4 py-2 text-red-800 font-body-plex font-semibold'>
  
-
-</p> */}
+{error}
+</p>}
       </form>
 
       <div className="flex flex-row justify-center gap-4 text-blue-gray-600">
@@ -67,4 +76,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default SignIn

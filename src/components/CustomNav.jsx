@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
  
-function CustomNav() {
+function CustomNav(props) {
   const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -77,7 +77,9 @@ function CustomNav() {
                 size="sm"
                 className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
               >
-                <span>Organisations</span>
+                <span>
+                  {props.buttonText}
+                </span>
               </Button>
               </Link>
               <Link to="/researchers">

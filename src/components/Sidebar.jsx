@@ -13,6 +13,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import { UserAuth } from '../context/authContext';
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
  
 
 
@@ -20,6 +23,7 @@ function Sidebar(props) {
   const [open, setOpen] = React.useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
+  const {logout} = UserAuth();
  
   return (
     <React.Fragment>
@@ -62,7 +66,13 @@ function Sidebar(props) {
           </ListItem>
           </Link>
 ))}
-       
+       {props.placement === "right" && (
+          <ListItem className="font-body-plex text-blue-gray-800">
+            <button onClick={logout}>
+            <FontAwesomeIcon  icon={faRightFromBracket} />
+            Sign Out</button>
+          </ListItem>
+        )}
         </List>
  
       </Drawer>

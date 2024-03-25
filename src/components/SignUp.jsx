@@ -1,23 +1,41 @@
 import React from 'react'
 import {useState }  from 'react'
-import {Link } from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { UserAuth } from '../context/authContext'
+import { db } from '../firebaseConfig'
+import { setDoc, doc } from 'firebase/firestore'
+
 
 function SignUp() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+const { SignUp } = UserAuth()
+const [error, setError] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-   console.log('Form Submitted')
+   await SignUp(email, password, firstName, lastName).then((userCredential) => {
+    // Signed up 
+   
+        
+        // Create a user profile in your 'Users' collection
     
-    }
+        navigate('/researchers')
+
+    
+    }).catch((e) => {
+      setError(e.message)
+    })
+  }
+      
+
 
   return (
    <div className="bg-blue-gray-50 w-4/5 flex flex-col content-center justify-around h-screen m-auto">
@@ -44,10 +62,7 @@ function SignUp() {
          onChange={(e) => setEmail(e.target.value)} 
          className='font-body-plex font-light border-b-[1px] w-2/3 border-blue-gray-200' required/>
 
-        {/* Input for phone number */}
-        <input type="tel" value={phoneNumber} placeholder='Phone Number' 
-         onChange={(e) => setPhoneNumber(e.target.value)} 
-         className='font-body-plex font-light border-b-[1px] w-5/6 border-blue-gray-200' required/>
+   
 
         {/* Input for password */}
         <input type="password" value={password} placeholder='Password' 

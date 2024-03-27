@@ -5,25 +5,32 @@ import UserMana from '../assets/images/collab.png'
 import CustomCard from './CustomCard';
 import Collab from '../assets/images/collab.png';
 import CustomNav  from './CustomNav';
+import { PricingCard } from './PricingCard';
 
 
 // List of services offered to organisations
 
 const services = [
   {
-    title: "Secure Data Management",
-    description: "Afromics offers organisations secure data management solutions to ensure that sensitive data is protected and only accessible to authorised personnel.",
-    image: Secure
+    title: 'Standard', 
+    team: '10',
+    dataSize: '10',
+    jobPosts: '20',
+    Archive: '10',
   },
   {
-    title: "Collaboration",
-    description: "Collaborate with other organisations and researchers to share data, resources and expertise to accelerate genomics research in Africa.",
-    image: Collaboration
+    title: 'Premium', 
+    team: '20',
+    dataSize: '20',
+    jobPosts: '40',
+    Archive: '20',
   },
   {
-    title: "User Management",
-    description: "Manage who has access to your data and resources with our user management solutions.",
-    image: UserMana
+    title: 'Enterprise', 
+    team: '30',
+    dataSize: '30',
+    jobPosts: '60',
+    Archive: '30',
   }
 
 ]
@@ -31,7 +38,7 @@ const services = [
 
 function Organisations() {
   return (
-    <div className="bg-blue-gray-100">
+    <div className="bg-blue-gray-50">
       <CustomNav buttonText="Contact Sales"/>
       <div className='flex flex-col place-content-center my-10 lg:py-10 sm:py-10'>
       
@@ -45,9 +52,7 @@ function Organisations() {
         </p>
      
           </div>
-          <div  className="">
-        
-        </div>
+         
         </div>
         
     
@@ -55,7 +60,14 @@ function Organisations() {
         
       </div>
     </div>
+<div className="bg-white shadow-2xl my-10 py-20 px-20 w-4/5 mx-auto grid gap-4 lg:grid-cols-3 sm:grid-cols-1">
 
+ {
+    services.map((service, index) => (
+      <PricingCard {...service} key={index}/>
+    ))
+ }
+</div>
     </div>
   )
 }

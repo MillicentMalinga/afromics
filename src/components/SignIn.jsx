@@ -14,15 +14,21 @@ function SignIn() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { signIn } = UserAuth();
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     setError('')
     try {
       await signIn(email, password)
+
+
       navigate('/researchers')
     } catch (e) {
       setError(e.message)
+    }finally {
+      setIsLoading(false)
     }
   };
   return (
@@ -52,8 +58,9 @@ function SignIn() {
 
 
         {/* Submit button */}
-<input type="submit" value="Login" className='bg-blue-gray-600 uppercase font-body-plex font-semibold text-white rounded-lg self-center w-1/2 py-4'/>
-{error &&
+ <button type="submit" disabled={isLoading} className='text-white self-center border-blue-gray-900 border-[1px] font-body-plex bg-blue-gray-900 rounded-full w-1/2 py-2 px-4'>
+        {isLoading ?  'Authenticating...' : 'LOGIN'}
+      </button>{error &&
 <p className='px-4 py-2 text-red-800 font-body-plex font-semibold'>
  
 {error}

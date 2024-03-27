@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react'
 
 
 
+
 function Researchers() {
   const {user} = UserAuth();
   const [firstName, setFirstName] = useState('');
@@ -29,7 +30,7 @@ function Researchers() {
         if (userDoc.exists()) {
           setFirstName(userDoc.data().firstName); // Extracting the firstName field
         } else {
-          console.log("No such document!");
+          setFirstName(''); // If the user document doesn't exist, set firstName to an empty string
         }
       }
     };

@@ -11,6 +11,14 @@ import { serverTimestamp } from 'firebase/firestore'
 import { africanCountries } from '../countries'
 import { Progress } from "@material-tailwind/react";
 import { useNavigate } from 'react-router-dom'
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
+
 
 
 
@@ -19,17 +27,19 @@ function DataForm() {
     const [description, setDescription] = useState('')
     const [tags, setTags] = useState('')
     const [file, setFile] = useState('')
-    const [visibility, setVisibility] = useState('public')
     const [accept, setAccept] = useState(false)
     const [country, setCountry] = useState('')
     const [error, setError] = useState('')
     const [perc, setPerc] = useState(0)
     const [data, setData] = useState()
     const {user} = UserAuth();
-    const [success, setSuccess] = useState(false)
-    const navigate = useNavigate()
+  
+    const [uploadDetails, setUploadDetails] = useState({ title: "", country: "", description:"" });
 
-
+    const [open, setOpen] = React.useState(false);
+ 
+    const handleOpen = () => setOpen(!open);
+    
     useEffect(() => {
         const uploadFile = () => {
           const name = new Date().getTime() + file.name;
@@ -68,31 +78,34 @@ function DataForm() {
         };
         file && uploadFile();
       }, [file]);
-    
+
+
 
 const handleSubmit = async (e) => {
     e.preventDefault();
+
     const docRef = await addDoc(collection(db, "Datasets"), {
         title: title,
         description: description,
         tags: tags,
-        visibility: visibility,
         file: data,
         user: user.uid,
         country:country,  
         timeStamp: serverTimestamp()
 
       }
+     
       )
         .then(() => {
-            setSuccess(true)
+          handleOpen()
+          setUploadDetails({ title: title, country: country, description: description });
             setCountry('')
             setDescription('')
             setTitle('')
             setTags('')
             setFile('')
             setPerc(0)
-            setVisibility('')
+           
             setAccept(false)
         })
       .catch((e) => {
@@ -142,16 +155,7 @@ const handleSubmit = async (e) => {
         </select>
                 
             </div>
-          
-            <div className="flex flex-col gap-2 my-2 font-body-plex text-xs">
-            <label htmlFor="visibility" className='font-bold text-xs'>Visibility <span className='text-red-800'>*</span></label>
-            <select name='visibility'  id="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)} className='font-body-plex border-[1px] border-blue-gray-500 rounded-lg py-2 px-4' required>
-            <option value="" disabled selected>--</option>
-          <option value="public">Public</option>
-          <option value="private">Private</option>
-        </select>
-                
-            </div>
+ 
             <div className="flex flex-col gap-2 my-2 font-body-plex text-xs">
             <label htmlFor="country" className='font-bold text-xs'>Country <span className='text-red-800'>*</span></label>
             <select name='country'  id="country" value={country} onChange={(e) => setCountry(e.target.value)} className='font-body-plex border-[1px] border-blue-gray-500 rounded-lg py-2 px-4' required>
@@ -188,15 +192,60 @@ const handleSubmit = async (e) => {
 </div>
 
 {error && <p className='text-red-800 font-body-plex text-xs'>{error}</p>}
-<Progress value={Math.round(perc)} size="md" label="Completed" className='font-body-plex' />
+{
+  perc > 0 && <p className='font-body-plex text-green-800 text-xs'>Dataset Upload Progress: {perc}%</p>
+}
 
-            <input type="submit" disabled={perc < 100 || error } value="Upload" className='bg-blue-gray-900 text-white w-max font-body-plex font-bold disabled:bg-blue-gray-200 rounded-full border-[1px] border-blue-gray-700 px-6 py-2' />
-            </form>
-            {success && <p className='bg-green-200 py-4  text-green-800 font-body-plex text-md'>Look at you being amazing and contributing to Science.</p>}
 
+
+
+<input
+  type="submit"
+  disabled={perc < 100 || error}
+  value={perc === 100 ? "Upload" : "Waiting for dataset..."}
+  className='bg-blue-gray-900 text-white w-max font-body-plex font-bold disabled:bg-blue-gray-200 rounded-full border-[1px] border-blue-gray-700 px-6 py-2'
+/>            </form>
         </div>
+
+        <>
+      
+      <Dialog
+        open={open}
+        handler={handleOpen}
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.9, y: -100 },
+        }}
+      >
+        <DialogHeader></DialogHeader>
+        <DialogBody>
+          <p className="font-body-plex text-green-800 text-sm">
+          The <span className="text-red-800">{uploadDetails.title} </span> dataset from <span className="text-red-800">{uploadDetails.country}</span>  was Successfully uploaded!
+          </p>
+          <p className='font-body-plex text-blue-gray-800 italic font-normal'>
+          Description: {uploadDetails.description}
+
+          </p>
+        </DialogBody>
+        <DialogFooter>
+          <button
+            
+            onClick={handleOpen}
+            className="mr-1 font-body-plex  bg-blue-gray-900 text-white uppercase rounded-full w-max py-2 px-4"
+          >
+            <span>Close</span>
+          </button>
+          <button  className='font-body-plex bg-blue-gray-900 text-white uppercase rounded-full w-max py-2 px-4' onClick={handleOpen}>
+            <span>Upload More</span>
+          </button>
+        </DialogFooter>
+      </Dialog>
+    </>
     </div>
+
+
   )
+
 }
 
 export default DataForm

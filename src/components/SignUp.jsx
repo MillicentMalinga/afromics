@@ -18,23 +18,26 @@ function SignUp() {
   const [lastName, setLastName] = useState('')
 const { SignUp } = UserAuth()
 const [error, setError] = useState('')
+const [isLoading, setIsLoading] = useState(false)
+const [showPopup, setShowPopup] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-   await SignUp(email, password, firstName, lastName).then((userCredential) => {
-    // Signed up 
-   
-        
-        // Create a user profile in your 'Users' collection
-    
-        navigate('/researchers')
-
-    
-    }).catch((e) => {
-      setError(e.message)
-    })
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true); // Start loading
+  try {
+    const userCredential = await SignUp(email, password, firstName, lastName);
+    // Signed up
+    // Create a user profile in your 'Users' collection
+    setShowPopup(true); // Show success popup
+    navigate('/researchers');
+    console.log(userCredential.user.uid);
+     // Show success popup
+  } catch (e) {
+    setError(e.message); // Set error message
+  } finally {
+    setIsLoading(false); // End loading whether success or fail
   }
-      
+};
 
 
   return (
@@ -78,19 +81,20 @@ const [error, setError] = useState('')
          className='font-body-plex font-light border-b-[1px] border-blue-gray-200' required/>
 
         {/* Submit button */}
-<input type="submit" value="Register" className='bg-blue-gray-600 uppercase font-body-plex font-semibold text-white rounded-lg self-center w-1/2 py-4'/>
+        <button type="submit" disabled={isLoading} className='text-white self-center border-blue-gray-900 border-[1px] font-body-plex bg-blue-gray-900 rounded-full w-max py-2 px-4'>
+        {isLoading ?  'Creating Account...' : 'Create Account'}
+      </button>
+      {showPopup && (
+        <div className='bg-green-200 text-green-800 font-body-plex px-4 py-2'>
 
-{/* <p className='bg-green-600 px-4 py-2 text-green-800 font-body-plex font-semibold'>
- 
+          Account Created Successfully! Navigating to home page...
+         
+        </div>
+      )}
+      {error && <div style={{color: 'red'}}>{error}</div>}
 
-</p> */}
       </form>
 
-      <div className="flex flex-row justify-center gap-4 text-blue-gray-600">
-      <FontAwesomeIcon icon={faGoogle} />
-      <FontAwesomeIcon icon={faFacebook} />
-      <FontAwesomeIcon icon={faTwitter} />
-      </div>
       <p className="text-blue-700 flex flex-row font-body-plex text-sm m-2 italic font-light gap-2 ">Already Have An Account? 
         <Link to="/login" className="text-blue-700 font-body-plex font-semibold">
          Login

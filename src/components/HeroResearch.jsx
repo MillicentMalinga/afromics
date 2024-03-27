@@ -61,13 +61,13 @@ const {logout} = UserAuth();
     ]
     return(
       <div className=' text-blue-gray-700 '>
-        <div className=' py-4 flex flex-row justify-between'>
+        <div className=' py-4 flex flex-row justify-between shadow-xl'>
           <div>
     
          
           <Sidebar items={data} placement="left" header={faBars} size="xl"/>
           </div>
-          <Search prompt="Search" />
+         
           <div>
     
          

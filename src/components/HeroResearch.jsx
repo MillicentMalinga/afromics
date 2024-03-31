@@ -2,12 +2,10 @@ import {faUser, faHome, faDatabase, faGear,  faFile, faComment, faBriefcase, faB
 import Search from './Search'
 import CreateMenu from './CreateMenu'
 import Sidebar from './Sidebar'
-import { UserAuth } from '../context/authContext'
 
 
 
 function HeroResearch(){
-const {logout} = UserAuth();
     const data = [
       {
     

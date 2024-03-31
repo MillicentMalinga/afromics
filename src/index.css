@@ -9,11 +9,3 @@
     
 }
 
-input:focus {
-    border-bottom: 1px solid #1f2937;
-}
-
-.search:focus {
-    border: none;
-
-}

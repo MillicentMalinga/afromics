@@ -1,7 +1,6 @@
 import React from 'react'
 import CustomNav from '../components/CustomNav'
 import Hero from '../components/Hero'
-import Organisations from '../components/Organisations'
 import Features from '../components/Features'
 import Footer from '../components/Footer'
 import { FrequentQuestions } from '../components/FAQs'

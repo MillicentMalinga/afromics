@@ -4,7 +4,6 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { storage } from '../firebaseConfig'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
-import { UserAuth } from '../context/authContext'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import { serverTimestamp } from 'firebase/firestore'
@@ -32,7 +31,6 @@ function DataForm() {
     const [error, setError] = useState('')
     const [perc, setPerc] = useState(0)
     const [data, setData] = useState()
-    const {user} = UserAuth();
   
     const [uploadDetails, setUploadDetails] = useState({ title: "", country: "", description:"" });
 
@@ -89,7 +87,6 @@ const handleSubmit = async (e) => {
         description: description,
         tags: tags,
         file: data,
-        user: user.uid,
         country:country,  
         timeStamp: serverTimestamp()
 

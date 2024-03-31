@@ -6,6 +6,7 @@ import CustomCard from './CustomCard';
 import Collab from '../assets/images/collab.png';
 import CustomNav  from './CustomNav';
 import { PricingCard } from './PricingCard';
+import Footer from './Footer';
 
 
 // List of services offered to organisations
@@ -68,6 +69,9 @@ function Organisations() {
     ))
  }
 </div>
+<div className='bg-blue-gray-50 mt-10'>
+    <Footer />
+    </div>
     </div>
   )
 }

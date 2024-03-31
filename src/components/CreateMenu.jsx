@@ -30,7 +30,7 @@ import {
                 New Dataset
               </ListItem>
             </Link>
-            <Link to="projects/new" href="#" className="text-initial font-medium text-blue-gray-500">
+            <Link to="/projects/new" href="#" className="text-initial font-medium text-blue-gray-500">
               <ListItem>
                 <ListItemPrefix>
                   <FontAwesomeIcon icon={faBriefcase} />

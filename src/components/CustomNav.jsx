@@ -6,13 +6,22 @@ import {
   Button,
   IconButton
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
  
 function CustomNav(props) {
   const [openNav, setOpenNav] = React.useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
  
+
+  const getPath = (path) => {
+    if (path === location.pathname) {
+      return true;
+    }
+  }
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -26,32 +35,34 @@ function CustomNav(props) {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className="p-1  cursor-pointer hover:bg-blue-gray-100 hover:rounded-lg hover:shadow-inner font-body-plex text-sm font-bold text-blue-gray-800"        onClick={() => navigate("/blog")}
       >
-        <a href="/blog" className="flex items-center font-body-plex text-md text-blue-gray-900">
+       
           Blog
-        </a>
+       
       </Typography>
       
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className="p-1  cursor-pointer hover:bg-blue-gray-100 hover:rounded-lg hover:shadow-inner font-body-plex text-sm font-bold text-blue-gray-800"        onClick={() => navigate("/about")}
       >
-        <a href="about" className="flex items-center font-body-plex text-md text-blue-gray-900 ">
+     
           About Us
-        </a>
+    
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal"
+        className="p-1  cursor-pointer hover:bg-blue-gray-100 hover:rounded-lg hover:shadow-inner font-body-plex text-sm font-bold text-blue-gray-800"
+       
+        onClick={() => navigate("/contact-us")}
       >
-        <a href="contact" className="flex items-center font-body-plex text-md text-blue-gray-900 ">
+        
          Contact Us
-        </a>
+    
       </Typography>
    
     </ul>
@@ -62,26 +73,30 @@ function CustomNav(props) {
       <Navbar className="sticky top-0 z-10 h-max max-w-full bg-inherit rounded-none px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
-            as="a"
-            href="#"
+           
             className="mr-4 font-logo lg:text-lg cursor-pointer py-1.5 font-medium"
+            onClick={() => navigate("/")}
           >
             Afromics
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <Link to="/organisations">
+             
               <Button
                 
                 size="sm"
                 className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
+                onClick={() => navigate(`${getPath("/organisations") ? "/contact" : "/organisations"}`)}
+                
               >
                 <span>
-                  {props.buttonText}
+                  {
+                    getPath("/organisations") ? "Contact Sales" : "Organisations"
+                  }
                 </span>
               </Button>
-              </Link>
+              
               <Link to="/researchers">
               <Button
                 

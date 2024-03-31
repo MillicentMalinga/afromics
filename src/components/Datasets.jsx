@@ -7,7 +7,7 @@ import { collection, doc, getDocs, getDoc, query, orderBy } from 'firebase/fires
 import { db } from '../firebaseConfig'; // Adjust the import path as necessary
 import IconCard from './IconCard';
 import DataCard from './DataCard';
-
+import Footer from './Footer';
 
 
 
@@ -98,17 +98,16 @@ function Datasets() {
       </div>
     </div>
    
-    <div>
+    <div className='mx-auto w-4/5'>
      
       <input
         type="text"
-        placeholder="Search datasets..."
+        placeholder="Search datasets..." 
         value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-        style={{ marginBottom: '20px' }} // Example styling, adjust as needed
+        onChange={e => setSearchQuery(e.target.value)} className='w-full px-4 py-2 rounded-full border-[1px] border-blue-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4 bg-white font-body-plex font-normal text-md text-blue-gray-800'
       />
     {filteredDatasets.length > 0 ? (
-  <div className='flex flex-col w-4/5 gap-4 mx-auto'>
+  <div className='flex flex-col w-full gap-4 mx-auto'>
     {filteredDatasets.map(dataset => (
       <DataCard
         key={dataset.id} // Assuming each dataset has a unique 'id' property
@@ -124,6 +123,9 @@ function Datasets() {
   <p>No datasets found.</p>
 )}
 
+    </div>
+    <div className='bg-blue-gray-50 mt-10'>
+    <Footer />
     </div>
     </div>
   )

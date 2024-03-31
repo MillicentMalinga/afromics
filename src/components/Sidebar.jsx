@@ -12,10 +12,11 @@ import {
 } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
-import { UserAuth } from '../context/authContext';
+import { Link, useNavigate } from 'react-router-dom';
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-
+import {auth } from '../firebaseConfig'
+import { toast } from "react-toastify";
+import Logout from "./Logout";
  
 
 
@@ -23,7 +24,10 @@ function Sidebar(props) {
   const [open, setOpen] = React.useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
-  const {logout} = UserAuth();
+  const navigate = useNavigate();
+
+  // logout function
+ 
  
   return (
     <React.Fragment>
@@ -68,9 +72,7 @@ function Sidebar(props) {
 ))}
        {props.placement === "right" && (
           <ListItem className="font-body-plex text-blue-gray-800">
-            <button onClick={logout}>
-            <FontAwesomeIcon  icon={faRightFromBracket} />
-            Sign Out</button>
+        <Logout />
           </ListItem>
         )}
         </List>

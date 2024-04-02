@@ -12,12 +12,13 @@ import NewData from './components/NewData';
 import Projects from './components/Projects';
 import Courses from './components/Courses';
 import Organisations from './components/Organisations';
-import NewProject from './components/NewProject';
 import ContactUs from './components/ContactUs';
 import Dashboard from './pages/Dashboard';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ForgotPassword from './pages/ForgotPassword';
 import ProtectedRoute from './components/protectedRoute';
+
 
 function App() {
  
@@ -35,7 +36,7 @@ function App() {
     <Route path="/contact" element={<ContactUs />} />
   
     <Route path="/datasets" element={<Datasets />} />
- 
+ <Route path="forgot-password" element={<ForgotPassword />} />
     <Route path="/dashboard" element={<Dashboard />} />
 
     <Route path="/researchers" element={<ProtectedRoute><Researchers /></ProtectedRoute>} />

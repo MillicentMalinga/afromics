@@ -1,21 +1,18 @@
 import React from "react";
 import {
   Drawer,
-  Button,
+
   Typography,
   IconButton,
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
+  
 } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from 'react-router-dom';
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import {auth } from '../firebaseConfig'
-import { toast } from "react-toastify";
+
+import { Link } from 'react-router-dom';
+
 import Logout from "./Logout";
  
 
@@ -24,7 +21,7 @@ function Sidebar(props) {
   const [open, setOpen] = React.useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
-  const navigate = useNavigate();
+
 
   // logout function
  

@@ -1,6 +1,7 @@
 import React from 'react'
 import HeroResearch from './HeroResearch'
 import DataForm from './DataForm'
+import TestForm from './TestForm'
 
 function NewData() {
   return (
@@ -22,7 +23,7 @@ function NewData() {
             </p>
             </div>
         <hr  className='w-full'/>
-           <DataForm />
+           <TestForm />
         </div>
        
 

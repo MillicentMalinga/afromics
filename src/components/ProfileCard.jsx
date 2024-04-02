@@ -4,7 +4,7 @@ import {
   CardBody,
   Typography,
 } from "@material-tailwind/react";
-import profileImage from "../assets/images/profile.jpeg"
+import profileImage from "../assets/images/profile-happy.jpeg"
  
 import React from "react";
 

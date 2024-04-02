@@ -1,9 +1,9 @@
 import HeroResearch from "../components/HeroResearch";
-import {auth } from '../firebaseConfig'
+
 import { toast } from 'react-toastify'
 import { updateProfile } from "@firebase/auth";
-import {updateDoc, doc, getDoc} from "firebase/firestore";
-import { useEffect, useState } from "react";
+import {updateDoc, doc} from "firebase/firestore";
+import { useState } from "react";
 import { db } from "../firebaseConfig";
 import React from 'react'
 import ProfileCard from "../components/ProfileCard";
@@ -73,7 +73,8 @@ function Profile() {
    
 
   return (
-    <div className="bg-white flex flex-col gap-10">
+    
+    user &&   <div className="bg-white flex flex-col gap-10">
         <HeroResearch />
         <div className="profile flex flex-col w-4/5 mx-auto">
             <ProfileCard userName={user.displayName} email={user.email} bio={formData.bio} 
@@ -120,6 +121,8 @@ function Profile() {
 
 
     </div>
+  
+
   )
 }
 

@@ -1,14 +1,12 @@
 import React from 'react'
-import Sidebar from './Sidebar'
-import {faUser, faHome, faDatabase, faGear,  faFile, faComment, faBriefcase, faBlog, faBars, faUserLarge, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
-import Search from './Search'
+
+
 import CreateMenu from './CreateMenu'
 import TrendingOrgs from './TrendingOrgs'
 import Woman from '../assets/images/woman-research-removebg-preview.png'
 import HeroResearch from './HeroResearch'
 import { getAuth } from 'firebase/auth'
-import {db, auth } from '../firebaseConfig'
-import { useState, useEffect } from 'react'
+
 
 
 

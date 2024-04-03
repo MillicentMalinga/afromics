@@ -38,7 +38,7 @@ import {
                 New Project
               </ListItem>
             </Link>
-            <Link to="/blog/new" className="text-initial font-medium text-blue-gray-500">
+            <Link to="/blogs/new" className="text-initial font-medium text-blue-gray-500">
               <ListItem>
                 <ListItemPrefix>
                   <FontAwesomeIcon icon={faBlog} />

@@ -21,6 +21,7 @@ import ProtectedRoute from './components/protectedRoute';
 import NewBlog from './pages/NewBlog';
 import BlogPost from './pages/BlogPost';
 import BlogPosts from './pages/BlogPosts';
+import NewProject from './components/NewProject';
 
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
     <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
     <Route path="/datasets" element={<ProtectedRoute><Datasets /></ProtectedRoute>} />
     <Route path="/datasets/new" element={<ProtectedRoute><NewData /></ProtectedRoute>} />
+    <Route path="/projects/new" element={<ProtectedRoute><NewProject /></ProtectedRoute>} />
+
     <Route path="/blogs/new" element={<ProtectedRoute><NewBlog /></ProtectedRoute>} />
     <Route path="/blogs" element={<ProtectedRoute><BlogPosts /></ProtectedRoute>} />
     <Route path="/blogs/:postId" element={<ProtectedRoute><BlogPost /></ProtectedRoute>} />

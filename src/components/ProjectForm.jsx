@@ -16,6 +16,8 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import { toast } from 'react-toastify'
+import { UserAuth } from '../context/authContext'
 
 
 
@@ -26,6 +28,11 @@ function DataForm() {
     const [short_description, setShortDescription] = useState('')
     const [long_description, setLongDescription] = useState('')
     const [deadline, setDeadline] = useState('')
+    const {user} = UserAuth();
+    const [country, setCountry] = useState('')
+    const [delivery, setDelivery] = useState('')
+    const [category, setCategory] = useState('')
+
     
   
     const [uploadDetails, setUploadDetails] = useState({ title: "", short_description: "", long_description:"", deadline: "" });
@@ -45,13 +52,19 @@ const handleSubmit = async (e) => {
         short_description: short_description,
         long_description: long_description,
         deadline: deadline,
-        timeStamp: serverTimestamp()
+        timeStamp: serverTimestamp(),
+        contact: user?.email,
+        leadResearcher: user?.displayName,
+        country: country,
+        delivery: delivery,
+        category: category
 
       }
      
       )
         .then(() => {
-          handleOpen()
+      
+          toast.success("Project successfully shared!")
           setUploadDetails({ title: title, long_description, short_description, deadline});
           setTitle('')
           setLongDescription('')
@@ -77,7 +90,7 @@ const handleSubmit = async (e) => {
                 <label htmlFor="title" className='font-body-plex font-semibold text-xs'>Project Name<span className='text-red-800'>*</span></label>
                 <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a clear name for your dataset' className="border-[1px] font-body-plex placeholder:font-light placeholder:text-sm border-blue-gray-100 rounded-lg px-4 py-2" required/>
                 {
-                    title.length > 50 ? <p className='text-red-800 text-xs font-body-plex'>Title cannot be more than 50 characters</p> : 
+                    title.length < 50 ? <p className='text-red-800 text-xs font-body-plex'>Title cannot be less than 50 characters</p> : 
                     <p className='text-green-600 text-xs font-body-plex'>{title.length}/{50}</p>
                 }
                 
@@ -87,7 +100,7 @@ const handleSubmit = async (e) => {
                 <textarea rows={5} type="text" name="description" id="description" value={short_description} onChange={(e) => setShortDescription(e.target.value)} placeholder='Enter a concise description' 
                 className="border-[1px] font-body-plex placeholder:font-light placeholder:text-sm text-sm border-blue-gray-100 rounded-lg px-4 py-2" required />
                 {
-                    short_description.length > 140 ? <p className='text-red-800 text-xs font-body-plex'>Description can not be more than 140 characters</p> : 
+                    short_description.length < 140 ? <p className='text-red-800 text-xs font-body-plex'>Description can not be less than 140 characters</p> : 
                     <p className='text-green-600 text-xs font-body-plex'>{short_description.length}/{140}</p>
                 }
                 
@@ -97,16 +110,25 @@ const handleSubmit = async (e) => {
                 <textarea rows={5} type="text" name="description" id="description" value={long_description} onChange={(e) => setLongDescription(e.target.value)} placeholder='Enter a concise description' 
                 className="border-[1px] font-body-plex placeholder:font-light placeholder:text-sm text-sm border-blue-gray-100 rounded-lg px-4 py-2" required />
                 {
-                   long_description.length > 140 ? <p className='text-red-800 text-xs font-body-plex'>Description can not be more than 140 characters</p> : 
-                    <p className='text-green-600 text-xs font-body-plex'>{long_description.length}/{300}</p>
+                   long_description.length < 300 ? <p className='text-red-800 text-xs font-body-plex'>Description can not be less than 300 characters</p> : 
+                    <p className='text-green-600 text-xs font-body-plex'>{long_description.length}</p>
                 }
                 
             </div>
-
+            <div>
+            <label htmlFor="country">Select a country:</label>
+            <select id="country" value={country} onChange={(e) => setCountry(e.target.value)}>
+                {africanCountries.map((country, index) => (
+                    <option key={index} value={country}>
+                        {country}
+                    </option>
+                ))}
+            </select>
+        </div>
             
             <div className="flex flex-col gap-2 my-2">
            <label htmlFor="deadline" className='font-body-plex font-semibold text-xs'>Deadline<span className='text-red-800'>*</span></label>
-                <input type="date" name="deadline" id="deadline" className='font-body-plex text-xs border-b-[1px] border-b-blue-gray-400 text-blue-gray-700' required/>
+                <input type="date" name="deadline" id="deadline" className='font-body-plex text-xs border-b-[1px] border-b-blue-gray-400 text-blue-gray-700' value={deadline} onChange={(e) => setDeadline(e.target.value)} required/>
             </div>
  
 <input  type="submit"  className='bg-blue-gray-900 text-white w-max font-body-plex font-bold disabled:bg-blue-gray-200 rounded-full border-[1px] border-blue-gray-700 px-6 py-2'

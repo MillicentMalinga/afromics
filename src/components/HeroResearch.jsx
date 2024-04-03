@@ -36,7 +36,7 @@ function HeroResearch(){
       {
         title: 'Blog',
         icon: faBlog,
-        link: '/blog'
+        link: '/blogs'
       }
     ]
     

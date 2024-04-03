@@ -8,9 +8,9 @@ import Researchers from './components/Researchers';
 import Work from './components/Work'
 import Profile from './pages/Profile'
 import Datasets from './components/Datasets';
-import NewData from './components/NewData';
+import NewData from './pages/NewData';
 import Projects from './components/Projects';
-import Courses from './components/Courses';
+import Courses from './pages/Courses';
 import Organisations from './components/Organisations';
 import ContactUs from './components/ContactUs';
 import Dashboard from './pages/Dashboard';
@@ -18,6 +18,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ForgotPassword from './pages/ForgotPassword';
 import ProtectedRoute from './components/protectedRoute';
+import NewBlog from './pages/NewBlog';
+import BlogPost from './pages/BlogPost';
+import BlogPosts from './pages/BlogPosts';
 
 
 function App() {
@@ -40,11 +43,15 @@ function App() {
     <Route path="/dashboard" element={<Dashboard />} />
 
     <Route path="/researchers" element={<ProtectedRoute><Researchers /></ProtectedRoute>} />
-    <Route path="/work" element={<ProtectedRoute><Work /></ProtectedRoute>} />
+    <Route path="/work/:userId" element={<ProtectedRoute><Work /></ProtectedRoute>} />
     <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
     <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
     <Route path="/datasets" element={<ProtectedRoute><Datasets /></ProtectedRoute>} />
     <Route path="/datasets/new" element={<ProtectedRoute><NewData /></ProtectedRoute>} />
+    <Route path="/blogs/new" element={<ProtectedRoute><NewBlog /></ProtectedRoute>} />
+    <Route path="/blogs" element={<ProtectedRoute><BlogPosts /></ProtectedRoute>} />
+    <Route path="/blogs/:postId" element={<ProtectedRoute><BlogPost /></ProtectedRoute>} />
+
 
     
     </Routes>

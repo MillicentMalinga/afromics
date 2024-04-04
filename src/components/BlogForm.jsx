@@ -17,6 +17,24 @@ const categories = [
     'hiv'
 ]
 
+const tags = [
+    'virus',
+    'bacteria',
+    'fungus',
+    'syphillis',
+    'hiv',
+    'cancer',
+    'ebola',
+    'malaria',
+    'tuberculosis',
+    'coronavirus',
+    'covid-19',
+    'genomics',
+    'bioinformatics',
+    'biotechnology',
+    'microbiology',
+]
+
 function BlogForm() {
     // unpacking the user object from the UserAuth hook
     const { user } = UserAuth();

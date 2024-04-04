@@ -1,6 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Collab from '../assets/images/woman-scientist.jpg'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
@@ -8,12 +6,12 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 function BlogCardDesign({title, img, author, likes, body, date, category}) {
   return (
-    <div className='bg-white flex flex-row justify-start gap-6 h-auto'>
+    <div className='bg-white flex flex-row rounded-tl-2xl rounded-bl-2xl  justify-start gap-6 h-auto'>
         <div className="rounded-2xl h-60">
             <img src={img} alt="Collab" className='rounded-2xl w-full h-full object-cover' />
             
         </div>
-        <div className="body flex flex-col w-2/3">
+        <div className="body flex flex-col w-2/3 pt-4">
             <div className="flex flex-row text-blue-gray-600 gap-6">
                 <p className="font-body-plex font-normal text-xs text-blue-gray-300">
                     {date}

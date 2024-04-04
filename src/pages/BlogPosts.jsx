@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, doc, getDoc, query, orderBy, limit} from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, query, orderBy} from "firebase/firestore";
 import { db } from "../firebaseConfig"; // import your Firebase config file
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
@@ -7,27 +7,10 @@ import BlogCardDesign from '../components/BlogCardDesign';
 import formatDate  from '../components/formatDate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomNav from '../components/CustomNav';
-import filter from '../assets/images/filter.svg';
-import {  faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {  faPen} from '@fortawesome/free-solid-svg-icons';
 
 
-const tags = [
-    'virus',
-    'bacteria',
-    'fungus',
-    'syphillis',
-    'hiv',
-    'cancer',
-    'ebola',
-    'malaria',
-    'tuberculosis',
-    'coronavirus',
-    'covid-19',
-    'genomics',
-    'bioinformatics',
-    'biotechnology',
-    'microbiology',
-]
+
 function BlogPosts() {
     const [blogPosts, setBlogPosts] = useState([]);
     // Add this line
@@ -35,21 +18,23 @@ function BlogPosts() {
     useEffect(() => {
         async function fetchBlogPosts() {
             const blogPostsCollection = collection(db, 'blogPosts');
-            const blogPostsSnapshot = await getDocs(blogPostsCollection);
+            const q = query(blogPostsCollection, orderBy("createdAt", "desc")); // Order by createdAt
+            const blogPostsSnapshot = await getDocs(q);
             const posts = blogPostsSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
-
+    
             // Fetch author's displayName for each post
             for (let post of posts) {
                 const userSnapshot = await getDoc(doc(db, 'users', post.author));
                 const userData = userSnapshot.data();
                 post.authorName = userData.displayName;
             }
-
+    
             setBlogPosts(posts);
         }
-
+    
         fetchBlogPosts().catch(console.error);
     }, []);
+    
 
    
 

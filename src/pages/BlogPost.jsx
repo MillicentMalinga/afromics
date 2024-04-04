@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // import your Firebase config file
 import { UserAuth } from '../context/authContext';
-import HeroResearch from '../components/HeroResearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faThumbsUp, faBook, faDotCircle, faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
-import { Dialog, Button } from "@material-tailwind/react";
+import {  faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { Dialog, } from "@material-tailwind/react";
 import Footer from '../components/Footer';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
-import { BlogCard } from '../components/BlogCard';
 import { toast } from 'react-toastify';
+import BlogCardDesign from '../components/BlogCardDesign';
+import CustomNav from '../components/CustomNav';
 
 
 function BlogPost() {
@@ -57,7 +57,7 @@ const {user} = UserAuth();
         async function fetchTopPosts() {
             const postsQuery = query(collection(db, 'blogPosts'), orderBy('createdAt', 'desc'), limit(3));
             const postsSnapshot = await getDocs(postsQuery);
-            const posts = postsSnapshot.docs.map(doc => doc.data());
+            const posts = postsSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
 
              // Fetch author's displayName for each post
              for (let post of posts) {
@@ -120,11 +120,11 @@ const {user} = UserAuth();
     }
 
     return (
-        <div className='bg-blue-gray-50 flex flex-col'>
-            <HeroResearch />
+        <div className='bg-blue-50 flex flex-col gap-10'>
+            <CustomNav />
             <div className="flex flex-col">
             
-            <img src={post.image} alt={post.title} className='h-96 w-full object-cover object-center'/>
+            <img src={post.image} alt={post.title} className='h-1/4 shadow-2xl rounded-full w-1/4 place-self-center object-cover'/>
             <div className="w-4/5 mx-auto my-4">
             <h2 className='font-logo text-2xl text-center'>{post.title}</h2>
             <div className="flex flex-row justify-center gap-4 text-blue-gray-400 font-body-plex">
@@ -177,25 +177,27 @@ const {user} = UserAuth();
         size="md"
         open={open}
         handler={handleOpen}
-        className="bg-white h-[50%] shadow-none"
+        className="bg-teal-50 h-[50%] shadow-none py-10"
       >
             <h2 className='text-lg font-bold text-center font-body-plex text-blue-gray-800'>Share your thoughts</h2>
-       <form onSubmit={handleComment} className='bg-white align-middle my-[10%] w-1/2 mx-auto'>
-                <textarea type="text" value={comment} onChange={e => setComment(e.target.value)} placeholder="Leave your thoughts for the author" className='h-full font-body-plex text-xs' cols={30} />
-                <button type="submit" className='rounded-full bg-blue-gray-100 text-sm font-body-plex w-max px-8 '>Comment</button>
+       <form onSubmit={handleComment} className='bg-transparent flex flex-col align-middle my-[10%] w-1/2 mx-auto '>
+                <textarea type="text" value={comment} onChange={e => setComment(e.target.value)} placeholder="Leave your thoughts for the author" className='h-full bg-teal-50 font-body-plex text-xs' cols={30} />
+                <button type="submit" className='rounded-full bg-teal-100 shadow-xl text-sm font-body-plex w-max px-8 py-2 font-semibold '>Comment</button>
             </form>
       </Dialog>
            <div className="w-4/5 mx-auto gap-4 my-10">
             <h2 className='text-lg font-bold font-body-plex text-blue-gray-600 text-left my-10'>Top Posts</h2>
-        <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-4  grid-row-auto ">
+        <div className="flex flex-col  gap-4 ">
             {topPosts.map((post, index) => (
-                <BlogCard key={index} img={post.image} title={post.title} body={post.content.blocks.length > 0 && (
+                <Link to={`/blogs/${post.id}`} key={index}>
+                <BlogCardDesign key={index} img={post.image} category={post.category || 'other'} title={post.title} body={post.content.blocks.length > 0 && (
                     <div>
                         <h3>{post.content.blocks[0].subtitle}</h3>
                         <p className='text-clip h-20'>{post.content.blocks[0].text}</p>
                     </div>
-                )} author={post.authorName} date={formatDate(post.createdAt)} likes={post.likes?.length || 0} />
-            ))}
+                )} author={post.authorName || 'Admin'} date={formatDate(post.createdAt)} likes={post.likes?.length || 0} />
+           </Link>
+           ))}
             
         </div>
         </div>

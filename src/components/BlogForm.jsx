@@ -9,6 +9,14 @@ import { faMinusCircle,faCloudArrowUp, faNewspaper } from '@fortawesome/free-sol
 import { toast } from 'react-toastify'
 import InputGroup from './InputGroup'
 
+const categories = [
+    'virus',
+    'bacteria',
+    'fungus',
+    'other',
+    'hiv'
+]
+
 function BlogForm() {
     // unpacking the user object from the UserAuth hook
     const { user } = UserAuth();
@@ -162,7 +170,12 @@ async function handleSubmit(e) {
 
 </label>
 <input id="file-upload" type="file" style={{display: 'none'}} onChange={handleFileChange} />
-
+<select name='category' value={category} onChange={(e) => setBlogForm({ ...blogForm, [e.target.name]: e.target.value })} className='w-1/4 px-4 py-2 rounded-xl font-body-plex text-sm font-bold border-[1px]'>
+    <option value=''>Select a category</option>
+    {categories.map((category, index) => (
+        <option key={index} value={category}>{category}</option>
+    ))}
+</select>
 <span className='cursor-pointer font-body-plex font-bold text-xs text-blue-gray-300 ' onClick={newBlockForm}>
 <FontAwesomeIcon icon={faNewspaper} /> Add New Block
 </span>

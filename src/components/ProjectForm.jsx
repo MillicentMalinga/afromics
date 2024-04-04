@@ -8,6 +8,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import { serverTimestamp } from 'firebase/firestore'
 import { africanCountries } from '../countries'
+import InputGroup from './InputGroup'
 
 import {
   Button,
@@ -20,6 +21,9 @@ import { toast } from 'react-toastify'
 import { UserAuth } from '../context/authContext'
 
 
+const categories = [
+  "viral", "bacterial", "fungal", "cancer", "other"
+]
 
 
 function DataForm() {
@@ -32,7 +36,7 @@ function DataForm() {
     const [country, setCountry] = useState('')
     const [delivery, setDelivery] = useState('')
     const [category, setCategory] = useState('')
-
+    const [isSubmitting, setIsSubmitting] = useState(false)
     
   
     const [uploadDetails, setUploadDetails] = useState({ title: "", short_description: "", long_description:"", deadline: "" });
@@ -46,13 +50,14 @@ function DataForm() {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-
+  setIsSubmitting(true);
     const docRef = await addDoc(collection(db, "Projects"), {
         title: title,
         short_description: short_description,
         long_description: long_description,
         deadline: deadline,
         timeStamp: serverTimestamp(),
+        user: user?.uid,
         contact: user?.email,
         leadResearcher: user?.displayName,
         country: country,
@@ -65,11 +70,14 @@ const handleSubmit = async (e) => {
         .then(() => {
       
           toast.success("Project successfully shared!")
+
           setUploadDetails({ title: title, long_description, short_description, deadline});
           setTitle('')
           setLongDescription('')
           setShortDescription('')
           setDeadline('')
+          setCountry('')
+          setDelivery('')  
 
         })
       .catch((e) => {
@@ -88,17 +96,18 @@ const handleSubmit = async (e) => {
             <form action="" className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2">
                 <label htmlFor="title" className='font-body-plex font-semibold text-xs'>Project Name<span className='text-red-800'>*</span></label>
-                <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a clear name for your dataset' className="border-[1px] font-body-plex placeholder:font-light placeholder:text-sm border-blue-gray-100 rounded-lg px-4 py-2" required/>
+             
+                <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a clear name for your dataset' className="border-[1px] font-body-plex shadow-inner   placeholder:font-light placeholder:text-blue-gray-700 placeholder:text-sm border-blue-gray-100 rounded-lg px-4 py-2" required/>
                 {
                     title.length < 50 ? <p className='text-red-800 text-xs font-body-plex'>Title cannot be less than 50 characters</p> : 
                     <p className='text-green-600 text-xs font-body-plex'>{title.length}/{50}</p>
                 }
-                
+              
             </div>
             <div className="flex flex-col gap-2 my-2">
                 <label htmlFor="description" className='font-body-plex font-semibold text-xs'>Short Description<span className='text-red-800'>*</span></label>
                 <textarea rows={5} type="text" name="description" id="description" value={short_description} onChange={(e) => setShortDescription(e.target.value)} placeholder='Enter a concise description' 
-                className="border-[1px] font-body-plex placeholder:font-light placeholder:text-sm text-sm border-blue-gray-100 rounded-lg px-4 py-2" required />
+                className="border-[1px] font-body-plex placeholder:font-light placeholder:text-sm text-sm shadow-inner border-blue-gray-100 rounded-lg px-4 py-2" required />
                 {
                     short_description.length < 140 ? <p className='text-red-800 text-xs font-body-plex'>Description can not be less than 140 characters</p> : 
                     <p className='text-green-600 text-xs font-body-plex'>{short_description.length}/{140}</p>
@@ -115,9 +124,21 @@ const handleSubmit = async (e) => {
                 }
                 
             </div>
-            <div>
-            <label htmlFor="country">Select a country:</label>
-            <select id="country" value={country} onChange={(e) => setCountry(e.target.value)}>
+            <div className='flex flex-col'>
+            <label htmlFor="description" className='font-body-plex font-semibold text-xs'>Category<span className='text-red-800'>*</span></label>
+
+            <select id="country" value={category} onChange={(e) => setCategory(e.target.value)} required className='w-full mx-auto shadow-inner rounded-xl font-body-plex px-4 py-2 font-semibold text-xs text-blue-gray-500'>
+                {categories.map((category, index) => (
+                    <option key={index} value={category}>
+                        {category}
+                    </option>
+                ))}
+            </select>
+        </div>
+        <div className='flex flex-col'>
+            <label htmlFor="description" className='font-body-plex font-semibold text-xs'>Country<span className='text-red-800'>*</span></label>
+
+            <select id="country" value={country} onChange={(e) => setCountry(e.target.value)} required className='w-full mx-auto shadow-inner rounded-xl font-body-plex px-4 py-2 font-semibold text-xs text-blue-gray-500'>
                 {africanCountries.map((country, index) => (
                     <option key={index} value={country}>
                         {country}
@@ -125,7 +146,6 @@ const handleSubmit = async (e) => {
                 ))}
             </select>
         </div>
-            
             <div className="flex flex-col gap-2 my-2">
            <label htmlFor="deadline" className='font-body-plex font-semibold text-xs'>Deadline<span className='text-red-800'>*</span></label>
                 <input type="date" name="deadline" id="deadline" className='font-body-plex text-xs border-b-[1px] border-b-blue-gray-400 text-blue-gray-700' value={deadline} onChange={(e) => setDeadline(e.target.value)} required/>

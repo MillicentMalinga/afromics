@@ -29,9 +29,9 @@ function HeroResearch(){
         link: '/courses'
       },
       {
-        title: 'Opportunities',
+        title: 'Projects',
         icon: faBriefcase,
-        link: '/opportunities'
+        link: '/projects'
       },
       {
         title: 'Blog',
@@ -59,7 +59,7 @@ function HeroResearch(){
     ]
     return(
       <div className=' text-blue-gray-700 '>
-        <div className=' py-4 flex flex-row justify-between shadow-xl'>
+        <div className=' py-4 flex flex-row justify-between '>
           <div>
     
          

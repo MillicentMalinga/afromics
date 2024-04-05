@@ -1,13 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { UserAuth } from '../context/authContext'
 import { db, storage } from '../firebaseConfig'
-import { collection, addDoc,serverTimestamp  } from 'firebase/firestore'
+import {doc, getDoc, collection, updateDoc } from 'firebase/firestore'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle,faCloudArrowUp, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { toast } from 'react-toastify'
 import InputGroup from './InputGroup'
+import { useParams } from 'react-router-dom'
 
 const categories = [
     'virus',
@@ -18,10 +19,11 @@ const categories = [
 ]
 
 
-
-function BlogForm() {
+function EditForm() {
     // unpacking the user object from the UserAuth hook
     const { user } = UserAuth();
+    const postId = useParams();
+    const [post, setPost] = useState({});
 const [isPublishing, setIsPublishing] = useState(false);
     // form state
     const [blogForm, setBlogForm] = useState({
@@ -44,7 +46,37 @@ const [isPublishing, setIsPublishing] = useState(false);
 
 
 
+
+    useEffect(() => {
+        async function fetchBlogPost() {
+            if (!postId) return;
+    
+            const postDoc = doc(db, 'blogPosts', postId);
+            const postSnapshot = await getDoc(postDoc);
+            const postData = postSnapshot.data();
+    
+            // Include the id in the postData
+            postData.id = postSnapshot.id;
+    
+            // Fetch author's displayName
+            const userSnapshot = await getDoc(doc(db, 'users', postData.author));
+            const userData = userSnapshot.data();
+            postData.authorName = userData.displayName;
+    
+            // Set the form state
+            setBlogForm({
+                title: postData.title,
+                content: postData.content,
+                category: postData.category,
+                image: postData.image
+            });
+        }
+    
+        fetchBlogPost().catch(console.error);
+    }, [postId]); // Add postId as a dependency
+
     const { title, content, category } = blogForm;
+
     const handleChange = (e, index) => {
         const updatedBlocks = [...content.blocks];
         updatedBlocks[index] = {
@@ -90,6 +122,12 @@ const [isPublishing, setIsPublishing] = useState(false);
     }
 //  upload to database
 
+
+// ...
+
+
+
+
 async function handleSubmit(e) {
     e.preventDefault();
     setIsPublishing(true);
@@ -113,8 +151,7 @@ async function handleSubmit(e) {
     }
 
     // 1. Upload the cover image to Firebase Storage
-    const imageName = serverTimestamp() + file.name;
-    const storageRef = ref(storage, `coverImages/ ${imageName}`);
+    const storageRef = ref(storage, `coverImages/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on('state_changed', 
@@ -130,7 +167,7 @@ async function handleSubmit(e) {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
             // 2. Upload the blog post data to Firestore
-            await addDoc(collection(db, 'blogPosts'), {
+            await updateDoc(collection(db, 'blogPosts'), {
                 ...blogForm,
                 image: downloadURL,
                 author: user?.uid,
@@ -161,43 +198,43 @@ async function handleSubmit(e) {
 }
 
     return (
-        <div className='flex flex-col mx-auto py-20 px-10 bg-blue-gray-50 rounded-xl shadow-xl w-4/5'>
+        <div className='flex flex-col mx-auto py-20 px-10 bg-white rounded-xl shadow-xl w-4/5'>
           
 
-            <form className='w-full  items-start gap-10 mx-auto flex flex-col' onSubmit={handleSubmit}>
+            <form className='w-full gap-10 mx-auto flex flex-col' onSubmit={handleSubmit}>
 
-                <input type='text' className='font-body-plex lg:text-2xl w-4/5 mx-auto rounded-xl px-4 bg-inherit focus:border-b-[1px] focus:border-gray-100' name='title' placeholder='Title' value={title} onChange={(e) => setBlogForm({ ...blogForm, [e.target.name]: e.target.value })} />
-                <label htmlFor="file-upload" className="custom-file-upload w-4/5 mx-auto">
+                <input type='text' className='font-body-plex lg:text-2xl' name='title' placeholder='Title' value={title} onChange={(e) => setBlogForm({ ...blogForm, [e.target.name]: e.target.value })} />
+                <label htmlFor="file-upload" className="custom-file-upload">
                 <FontAwesomeIcon icon={faCloudArrowUp} />
     <span className='font-body-plex font-bold text-xs text-blue-gray-300 '>{file ? file.name : "Upload cover image"}</span>
 
 </label>
 <input id="file-upload" type="file" style={{display: 'none'}} onChange={handleFileChange} />
-<select name='category' value={category} onChange={(e) => setBlogForm({ ...blogForm, [e.target.name]: e.target.value })} className='w-4/5 mx-auto px-4 py-2 rounded-xl font-body-plex text-blue-gray-600  text-sm font-bold border-[1px]'>
+<select name='category' value={category} onChange={(e) => setBlogForm({ ...blogForm, [e.target.name]: e.target.value })} className='w-1/4 px-4 py-2 rounded-xl font-body-plex text-sm font-bold border-[1px]'>
     <option value=''>Select a category</option>
     {categories.map((category, index) => (
         <option key={index} value={category}>{category}</option>
     ))}
 </select>
-<span className='cursor-pointer font-body-plex font-bold text-xs w-4/5 mx-auto text-blue-gray-300 ' onClick={newBlockForm}>
+<span className='cursor-pointer font-body-plex font-bold text-xs text-blue-gray-300 ' onClick={newBlockForm}>
 <FontAwesomeIcon icon={faNewspaper} /> Add New Block
 </span>
                 {
                     content.blocks.map((block, index) => {
                         return (
-                            <div key={index} className='flex border-b-[1px] mx-auto border-b-blue-gray-300 flex-row w-full justify-between'>
+                            <div key={index} className='flex border-b-[1px] border-b-blue-gray-300 flex-row w-full justify-between'>
                                 <div className="flex flex-col gap-6">
                                 <InputGroup>
-                                <input type='text' name='subtitle' placeholder='Subtitle' value={block.subtitle} onChange={(e) => handleChange(e, index)} className={`w-full px-4 py-2 text-blue-gray-700 rounded-xl font-body-plex text-sm font-bold`} />
+                                <input type='text' name='subtitle' placeholder='Subtitle' value={block.subtitle} onChange={(e) => handleChange(e, index)} className={`w-full px-4 py-2 rounded-xl  font-body-plex text-sm font-bold border-[1px]`} />
 </InputGroup>
 {
-                               block.subtitle.length > 0 && block.subtitle.length < 10 && <p className='text-red-500 w-4/5 mx-auto text-xs font-bold font-body-plex '>Subtitle must be at least 10 characters</p>
+                                block.subtitle.length < 10 && <p className='text-red-500 text-sm'>Subtitle must be at least 10 characters</p>
 }
                               
                                 <InputGroup>
-                                <textarea name='text' cols={500} placeholder='Content' value={block.text} onChange={(e) => handleChange(e, index)} className={`w-full rounded-xl px-4 py-2 text-blue-gray-700   text-sm font-body-plex font-normal`} />
+                                <textarea name='text' cols={500} placeholder='Content' value={block.text} onChange={(e) => handleChange(e, index)} className={`w-full rounded-xl px-4 py-2  text-sm font-body-plex border-[1px] font-light`} />
                                 </InputGroup>
-                                {block.text.length > 0 && block.text.length < 150 && <p className='text-red-500 text-xs w-4/5 mx-auto font-bold font-body-plex'>Content must be at least 150 characters</p>}
+                                {block.text.length < 150 && <p className='text-red-500 text-sm'>Content must be at least 150 characters</p>}
                                 </div>
                                 <FontAwesomeIcon icon={faMinusCircle}  className='text-red-400' onClick={() => removeBlockForm(index)} />
                             </div>
@@ -213,4 +250,4 @@ async function handleSubmit(e) {
 }
 
 
-export default BlogForm;
+export default EditForm;

@@ -40,7 +40,7 @@ function BlogPosts() {
 
 
     return (
-        <div className='bg-white'>
+        <div className='bg-gray-50'>
             <CustomNav />
             <div className=" h-[60vh] justify-center bg-image items-start w-4/5 mx-auto flex flex-col " >
                 <Link to="/blogs/new" className="flex flex-row gap-4">

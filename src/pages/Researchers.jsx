@@ -1,11 +1,12 @@
 import React from 'react'
 
 
-import CreateMenu from './CreateMenu'
-import TrendingOrgs from './TrendingOrgs'
+import CreateMenu from '../components/CreateMenu'
+import TrendingOrgs from '../components/TrendingOrgs'
 import Woman from '../assets/images/woman-research-removebg-preview.png'
-import HeroResearch from './HeroResearch'
+import HeroResearch from '../components/HeroResearch'
 import { getAuth } from 'firebase/auth'
+import CustomNav from '../components/CustomNav'
 
 
 
@@ -19,9 +20,9 @@ const user = auth.currentUser;
 
   return (
     
-    <div className='bg-white text-blue-gray-700 '>
+    <div className='bg-gray-50 text-blue-gray-700 '>
      
-    <HeroResearch />
+   <CustomNav/>
 
     <div className='flex flex-col place-content-center my-10 lg:py-10 sm:py-10'>
       

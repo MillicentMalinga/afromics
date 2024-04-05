@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc, updateDoc, arrayUnion, deleteDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // import your Firebase config file
 import { UserAuth } from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import {  faHeart, faComment, faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Dialog, } from "@material-tailwind/react";
 import Footer from '../components/Footer';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
@@ -20,13 +20,14 @@ function BlogPost() {
     const [open, setOpen] = React.useState(false);
     const [topPosts, setTopPosts] = useState([]);
     const handleOpen = () => setOpen((cur) => !cur);
+    const navigate  = useNavigate();
 const {user} = UserAuth();
     useEffect(() => {
         async function fetchBlogPost() {
             const postDoc = doc(db, 'blogPosts', postId);
             const postSnapshot = await getDoc(postDoc);
             const postData = postSnapshot.data();
-        
+            postData.id = postSnapshot.id;
             // Fetch author's displayName
             const userSnapshot = await getDoc(doc(db, 'users', postData.author));
             const userData = userSnapshot.data();
@@ -81,7 +82,8 @@ const {user} = UserAuth();
         if (!postData.likes) postData.likes = [];
 
         if (postData.likes?.includes(user?.uid)) {
-            console.log('You have already liked this post.');
+            toast.error('We know the post is amazing. But you can only give one like');
+            
             return;
         }
     
@@ -108,6 +110,20 @@ const {user} = UserAuth();
         setComment('');
     };
 
+    const handleDelete = async (postId) => { 
+        
+        // Add this function
+        try {
+            await deleteDoc(doc(db, 'blogPosts', postId));
+
+            // Remove the post from local state
+            navigate('/blogs')
+            toast.success('Post deleted successfully');
+        } catch (error) {
+            console.error("Error deleting post: ", error);
+        }
+    }
+
     function formatDate(isoString) {
         let date = new Date(isoString);
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -125,7 +141,20 @@ const {user} = UserAuth();
             <div className="flex flex-col">
             
             <img src={post.image} alt={post.title} className='h-1/4 shadow-2xl rounded-full w-1/4 place-self-center object-cover'/>
+            
+            {user?.uid === post.author && ( // Add this conditional rendering
+                        <div className='place-self-center flex flex-row gap-4 mt-4'>
+                            <button onClick={() => handleDelete(post.id)}><FontAwesomeIcon icon={faTrash} className='text-red-500' /></button>
+                           
+                            {/* <button>
+                                <Link to={`/blogs/edit/${post.id}`}>
+                                    <FontAwesomeIcon icon={faPen} className='text-teal-600' />
+                                </Link>
+                            </button> */}
+                        </div>
+                    )}
             <div className="w-4/5 mx-auto my-4">
+
             <h2 className='font-logo text-2xl text-center'>{post.title}</h2>
             <div className="flex flex-row justify-center gap-4 text-blue-gray-400 font-body-plex">
             <p className='text-md font-semibold'>Written by: {post.authorName}</p>

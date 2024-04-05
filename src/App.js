@@ -4,7 +4,7 @@ import { Route, Routes} from 'react-router-dom';
 import Landing from './pages/Landing';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import Researchers from './components/Researchers';
+import Researchers from './pages/Researchers';
 import Work from './components/Work'
 import Profile from './pages/Profile'
 import Datasets from './components/Datasets';
@@ -22,6 +22,7 @@ import NewBlog from './pages/NewBlog';
 import BlogPost from './pages/BlogPost';
 import BlogPosts from './pages/BlogPosts';
 import NewProject from './components/NewProject';
+import EditForm from './components/EditForm';
 
 
 function App() {
@@ -50,12 +51,9 @@ function App() {
     <Route path="/datasets" element={<ProtectedRoute><Datasets /></ProtectedRoute>} />
     <Route path="/datasets/new" element={<ProtectedRoute><NewData /></ProtectedRoute>} />
     <Route path="/projects/new" element={<ProtectedRoute><NewProject /></ProtectedRoute>} />
-
     <Route path="/blogs/new" element={<ProtectedRoute><NewBlog /></ProtectedRoute>} />
     <Route path="/blogs" element={<ProtectedRoute><BlogPosts /></ProtectedRoute>} />
     <Route path="/blogs/:postId" element={<ProtectedRoute><BlogPost /></ProtectedRoute>} />
-
-
     
     </Routes>
     

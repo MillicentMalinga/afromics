@@ -26,7 +26,7 @@ const categories = [
 ]
 
 
-function DataForm() {
+function ProjectForm() {
     const [title, setTitle] = useState('')
     const [error, setError] = useState('')
     const [short_description, setShortDescription] = useState('')
@@ -97,7 +97,7 @@ const handleSubmit = async (e) => {
             <div className="flex flex-col gap-2">
                 <label htmlFor="title" className='font-body-plex font-semibold text-xs'>Project Name<span className='text-red-800'>*</span></label>
              
-                <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a clear name for your dataset' className="border-[1px] font-body-plex shadow-inner   placeholder:font-light placeholder:text-blue-gray-700 placeholder:text-sm border-blue-gray-100 rounded-lg px-4 py-2" required/>
+                <input type="text" name="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a clear name for your project' className="border-[1px] font-body-plex shadow-inner   placeholder:font-light placeholder:text-blue-gray-700 placeholder:text-sm border-blue-gray-100 rounded-lg px-4 py-2" required/>
                 {
                     title.length < 50 ? <p className='text-red-800 text-xs font-body-plex'>Title cannot be less than 50 characters</p> : 
                     <p className='text-green-600 text-xs font-body-plex'>{title.length}/{50}</p>
@@ -136,14 +136,22 @@ const handleSubmit = async (e) => {
             </select>
         </div>
         <div className='flex flex-col'>
-            <label htmlFor="description" className='font-body-plex font-semibold text-xs'>Country<span className='text-red-800'>*</span></label>
+            <label htmlFor="country" className='font-body-plex font-semibold text-xs'>Country<span className='text-red-800'>*</span></label>
 
             <select id="country" value={country} onChange={(e) => setCountry(e.target.value)} required className='w-full mx-auto shadow-inner rounded-xl font-body-plex px-4 py-2 font-semibold text-xs text-blue-gray-500'>
                 {africanCountries.map((country, index) => (
                     <option key={index} value={country}>
                         {country}
                     </option>
+
                 ))}
+            </select>
+        </div>
+        <div className='flex flex-col'>
+        <label htmlFor="delivery" className='font-body-plex font-semibold text-xs'>Work Delivery<span className='text-red-800'>*</span></label>
+            <select id="delivery" value={delivery} onChange={(e) => setDelivery(e.target.value)} required className='w-full mx-auto shadow-inner rounded-xl font-body-plex px-4 py-2 font-semibold text-xs text-blue-gray-500'>
+                  <option value="online">Online</option>
+                  <option value="in person">In Person</option>
             </select>
         </div>
             <div className="flex flex-col gap-2 my-2">
@@ -196,4 +204,4 @@ const handleSubmit = async (e) => {
 
 }
 
-export default DataForm
+export default ProjectForm

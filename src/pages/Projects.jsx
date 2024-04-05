@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {db} from '../firebaseConfig';
-import {collection, getDocs, query, orderBy, getDoc, doc} from 'firebase/firestore';
-import JobCard from './JobCard';
-import CustomNav from './CustomNav';
+import {collection, getDocs, query, orderBy} from 'firebase/firestore';
+import JobCard from '../components/JobCard';
+
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -41,8 +41,8 @@ const filteredProjects = projects.filter(project =>
 
 
     return (
-        <div className='flex flex-col gap-10 bg-gray-50'>
-            <CustomNav />
+        <div className='flex flex-col gap-10 mt-10 bg-gray-50'>
+            
             <div className='flex flex-col place-content-center gap-2 '>
                 <Link to="/projects/new" className="border-[1px] font-body-plex text-center text-xs self-center font-bold text-teal-900 w-max rounded-full border-blue-gray-200 p-2">
                     Don't see a project that interests you? Share your own project 

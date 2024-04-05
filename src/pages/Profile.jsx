@@ -1,5 +1,3 @@
-import HeroResearch from "../components/HeroResearch";
-
 import { toast } from 'react-toastify'
 import { updateProfile } from "@firebase/auth";
 import {updateDoc, doc} from "firebase/firestore";
@@ -10,6 +8,7 @@ import ProfileCard from "../components/ProfileCard";
 import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from "@material-tailwind/react";
 import InputGroup from "../components/InputGroup";
 import { UserAuth } from "../context/authContext";
+import Footer from '../components/Footer';
 
 function Profile() {
     const {user} = UserAuth();
@@ -74,9 +73,9 @@ function Profile() {
 
   return (
     
-    user &&   <div className="bg-white flex flex-col gap-10">
-        <HeroResearch />
-        <div className="profile flex flex-col w-4/5 mx-auto">
+    user &&   <div className="bg-white my-10 py-10 px-2 flex flex-col gap-10">
+       
+        <div className="profile  flex flex-col w-4/5 mx-auto">
             <ProfileCard userName={user.displayName} email={user.email} bio={formData.bio} 
             handleOpen={handleOpen}/>
             
@@ -119,7 +118,7 @@ function Profile() {
 
 
 
-
+<Footer />
     </div>
   
 

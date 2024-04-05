@@ -88,7 +88,7 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <div>
+    <div className=''>
         <div className="flex flex-col gap-10">
             <p className="font-body-plex text-lg font-bold">
             Basic Setup

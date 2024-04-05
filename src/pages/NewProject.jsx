@@ -1,13 +1,12 @@
 import React from 'react'
-import HeroResearch from './HeroResearch'
-import DataForm from './DataForm'
-import ProjectForm from './ProjectForm'
+
+import ProjectForm from '../components/ProjectForm'
 
 function NewProject() {
   return (
-    <div className='bg-white text-blue-gray-800'>
+    <div className=' text-blue-gray-800'>
        
-        <HeroResearch />
+     
 
         <div className="flex flex-col  place-content-center my-20 pb-20 lg:w-3/5 mx-auto gap-20">
             <div>

@@ -4,13 +4,12 @@ import { doc, getDoc, updateDoc, arrayUnion, deleteDoc } from "firebase/firestor
 import { db } from "../firebaseConfig"; // import your Firebase config file
 import { UserAuth } from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faHeart, faComment, faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
+import {  faHeart, faComment, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Dialog, } from "@material-tailwind/react";
 import Footer from '../components/Footer';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import BlogCardDesign from '../components/BlogCardDesign';
-import CustomNav from '../components/CustomNav';
 
 
 function BlogPost() {
@@ -136,8 +135,8 @@ const {user} = UserAuth();
     }
 
     return (
-        <div className='bg-blue-50 flex flex-col gap-10'>
-            <CustomNav />
+        <div className='bg-gray-50 mt-10 flex flex-col gap-10'>
+         
             <div className="flex flex-col">
             
             <img src={post.image} alt={post.title} className='h-1/4 shadow-2xl rounded-full w-1/4 place-self-center object-cover'/>

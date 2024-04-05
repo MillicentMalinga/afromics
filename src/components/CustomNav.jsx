@@ -31,39 +31,9 @@ function CustomNav(props) {
  
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1  cursor-pointer hover:bg-blue-gray-100 hover:rounded-lg hover:shadow-inner font-body-plex text-sm font-bold text-blue-gray-800"        onClick={() => navigate("/blog")}
-      >
-       
-          Blog
-       
-      </Typography>
-      
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1  cursor-pointer hover:bg-blue-gray-100 hover:rounded-lg hover:shadow-inner font-body-plex text-sm font-bold text-blue-gray-800"        onClick={() => navigate("/about")}
-      >
      
-          About Us
     
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1  cursor-pointer hover:bg-blue-gray-100 hover:rounded-lg hover:shadow-inner font-body-plex text-sm font-bold text-blue-gray-800"
-       
-        onClick={() => navigate("/contact-us")}
-      >
-        
-         Contact Us
     
-      </Typography>
    
     </ul>
   );
@@ -87,7 +57,7 @@ function CustomNav(props) {
                 
                 size="sm"
                 className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
-                onClick={() => navigate(`${getPath("/organisations") ? "/contact" : "/organisations"}`)}
+                onClick={() => navigate(`${getPath("/organisations") ? "/organisations" : "/organisations"}`)}
                 
               >
                 <span>
@@ -127,11 +97,21 @@ function CustomNav(props) {
         <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
-            <Link to="/organisations">
-            <Button fullWidth  size="sm" className="font-body-plex bg-blue-gray-500">
-              <span>Organisations</span>
-            </Button>
-            </Link>
+        
+            <Button fullWidth
+                
+                size="sm"
+                className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
+                onClick={() => navigate(`${getPath("/organisations") ? "/contact" : "/organisations"}`)}
+                
+              >
+                <span>
+                  {
+                    getPath("/organisations") ? "Contact Sales" : "Organisations"
+                  }
+                </span>
+              </Button>
+         
             <Link to="/researchers">
             <Button fullWidth size="sm" className="bg-white font-body-plex text-blue-gray-800">
               <span>Researchers</span>

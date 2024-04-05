@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import BlogCardDesign from '../components/BlogCardDesign';
 import formatDate  from '../components/formatDate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CustomNav from '../components/CustomNav';
+
 import {  faPen} from '@fortawesome/free-solid-svg-icons';
 
 
@@ -41,7 +41,7 @@ function BlogPosts() {
 
     return (
         <div className='bg-gray-50'>
-            <CustomNav />
+        
             <div className=" h-[60vh] justify-center bg-image items-start w-4/5 mx-auto flex flex-col " >
                 <Link to="/blogs/new" className="flex flex-row gap-4">
                 <div className='border-[1px] border-blue-gray-50 rounded-full bg-zinc-200 text-blue-gray-500 font-body-plex text-xs font-semibold px-4 py-2'>

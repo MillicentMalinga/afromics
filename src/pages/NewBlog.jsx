@@ -1,18 +1,18 @@
 import React from 'react'
 import BlogForm from '../components/BlogForm'
-import HeroResearch from '../components/HeroResearch'
-import {Link} from 'react-router-dom'
+
+
 import Blog from "../assets/images/course-hero.png"
 import Footer from '../components/Footer'
-import { UserAuth } from '../context/authContext'
-import CustomNav from '../components/CustomNav'
+
+
 
 
 function NewBlog() {
-  const {user}  = UserAuth();
+
   return (
     <div className='bg-gray-50'>
-    <CustomNav />
+    
       <div className='flex flex-col  place-content-center my-10 lg:py-10 sm:py-10'>
       
       <div className='w-4/5 mx-auto flex flex-col gap-4'>

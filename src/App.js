@@ -1,5 +1,4 @@
 import './App.css';
-import About from './components/About';
 import { Route, Routes} from 'react-router-dom';
 import Landing from './pages/Landing';
 import SignUp from './pages/SignUp';
@@ -7,12 +6,12 @@ import SignIn from './pages/SignIn';
 import Researchers from './pages/Researchers';
 import Work from './components/Work'
 import Profile from './pages/Profile'
-import Datasets from './components/Datasets';
+import Datasets from './pages/Datasets';
 import NewData from './pages/NewData';
-import Projects from './components/Projects';
+import Projects from './pages/Projects';
 import Courses from './pages/Courses';
 import Organisations from './components/Organisations';
-import ContactUs from './components/ContactUs';
+
 import Dashboard from './pages/Dashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,24 +20,31 @@ import ProtectedRoute from './components/protectedRoute';
 import NewBlog from './pages/NewBlog';
 import BlogPost from './pages/BlogPost';
 import BlogPosts from './pages/BlogPosts';
-import NewProject from './components/NewProject';
-import EditForm from './components/EditForm';
-
+import NewProject from './pages/NewProject';
+import { UserAuth } from './context/authContext';
+import ProtectedNav from './components/ProtectedNav';
+import CustomNav from './components/CustomNav';
+import Dataset from './pages/Dataset';
 
 function App() {
+  const {user} = UserAuth();
+
  
   return (
-    <div className='bg-blue-gray-50 overflow-x-hidden'>
+    <div className='bg-gray-50 overflow-x-hidden'>
+      {
+        user ? <ProtectedNav /> : <CustomNav />
+      }
 
  
     <Routes>
     <Route path="/" element={<Landing/>} />
     <Route path="/login" element={<SignIn/>} />
-    <Route path='/about' component={< About />} />
+  
     <Route path="/register" element={< SignUp />} />
     <Route path='/courses' element={<Courses />} />
     <Route path="/organisations" element={<Organisations />} />
-    <Route path="/contact" element={<ContactUs />} />
+  
   
     <Route path="/datasets" element={<Datasets />} />
  <Route path="forgot-password" element={<ForgotPassword />} />
@@ -54,6 +60,9 @@ function App() {
     <Route path="/blogs/new" element={<ProtectedRoute><NewBlog /></ProtectedRoute>} />
     <Route path="/blogs" element={<ProtectedRoute><BlogPosts /></ProtectedRoute>} />
     <Route path="/blogs/:postId" element={<ProtectedRoute><BlogPost /></ProtectedRoute>} />
+    <Route path="/datasets/:dataId" element={<ProtectedRoute><Dataset /></ProtectedRoute>} />
+
+    
     
     </Routes>
     

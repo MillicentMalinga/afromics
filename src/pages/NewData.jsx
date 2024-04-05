@@ -1,12 +1,11 @@
 import React from 'react'
-import HeroResearch from '../components/HeroResearch'
 import DataForm from '../components/DataForm'
 
 function NewData() {
   return (
-    <div className='bg-white text-blue-gray-800'>
+    <div className='text-blue-gray-800'>
        
-        <HeroResearch />
+   
 
         <div className="flex flex-col  place-content-center my-20 pb-20 lg:w-3/5 mx-auto gap-20">
             <div>

@@ -1,6 +1,5 @@
 import React from 'react'
 import Student  from '../assets/images/course-hero.png'
-import HeroResearch from '../components/HeroResearch'
 import { faPython } from '@fortawesome/free-brands-svg-icons'
 import { faChartLine, faChartSimple, faDna, faRobot } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,6 +12,7 @@ import {
     DialogFooter,
     Typography,
   } from "@material-tailwind/react";
+import Footer from '../components/Footer'
 
 const data = [
     {
@@ -95,8 +95,8 @@ export function LearnDialog() {
 
 function Courses() {
   return (
-    <div className='bg-white text-blue-gray-800'>
-          <HeroResearch className=""/>   
+    <div className=' text-blue-gray-800'>
+        
       <div className='lg:w-4/5 py-8 mb-20  px-10 pb-40 mx-auto flex h-[55vh] flex-col gap-4'>
         <div className='flex lg:flex-row-reverse sm:flex-col gap-8'>
           <img src={Student} alt="" className='lg:w-1/3 sm:w-full rounded-b-full' />
@@ -147,7 +147,7 @@ But as we work on this, we want you to continue growing professionally. Please c
 
         </div>
       </div>
-
+<Footer />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 function BlogCardDesign({title, img, author, likes, body, date, category}) {
   return (
-    <div className='bg-white flex flex-row rounded-tl-2xl rounded-bl-2xl  justify-start gap-6 h-auto'>
+    <div className='bg-white flex md:flex-row sm:flex-col rounded-tl-2xl rounded-bl-2xl  justify-start gap-6 h-auto'>
         <div className="rounded-2xl h-60">
             <img src={img} alt="Collab" className='rounded-2xl w-full h-full object-cover' />
             

@@ -188,7 +188,7 @@ const handleDelete = async (dataId) => {
           <p className="font-body-plex text-blue-gray-500 font-semibold text-xs">
               {dataset.author}
             </p>
-            <p className="font-body-plex text-blue-gray-500 font-bold text-xs">
+            <p className="font-body-plex sm:flex-grow text-blue-gray-500 font-bold text-xs">
               {dataset.timeStamp && formatDate(dataset.timeStamp.seconds * 1000)}
             </p>
            

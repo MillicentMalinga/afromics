@@ -266,7 +266,9 @@ function ProtectedNav() {
                 
                 size="sm"
                 className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
-                onClick={() => navigate(`${getPath("/organisations") ? "/organisations" : "/organisations"}`)}
+                onClick={() => {navigate(`${getPath("/organisations") ? "/organisations" : "/organisations"}` ) 
+                setOpenNav(!openNav)
+              }}
                 
               >
                 <span>
@@ -275,7 +277,8 @@ function ProtectedNav() {
                   }
                 </span>
               </Button>
-          <Button onClick={logout} size="sm" color="blue-gray" className="font-body-plex font-bold">
+          <Button     onClick={() => {logout(); setOpenNav(!openNav)}}
+size="sm" color="blue-gray" className="font-body-plex font-bold">
             Log Out
           </Button>
 

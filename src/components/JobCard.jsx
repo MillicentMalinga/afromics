@@ -20,7 +20,7 @@ function JobCard(props) {
           <p className="font-bold text-xs place-self-end text-teal-900 bg-teal-200 rounded-xl px-2 py-2 w-max">
             Apply by: {props.deadline}
           </p>
-    <div className="flex flex-row gap-4 my-2 justify-between">
+    <div className="flex md:flex-row sm:flex-col gap-4 my-2 justify-between">
       <p className="font-body-plex text-xs font-bold">
         {props.country}
       </p>

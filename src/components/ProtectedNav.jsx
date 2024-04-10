@@ -267,7 +267,7 @@ function ProtectedNav() {
                 size="sm"
                 className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
                 onClick={() => {navigate(`${getPath("/organisations") ? "/organisations" : "/organisations"}` ) 
-                setOpenNav(!openNav)
+               
               }}
                 
               >

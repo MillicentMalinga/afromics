@@ -18,38 +18,38 @@ const data = [
     {
         title: 'Python Programming',
         icon: faPython,
-        link: '/courses/python',
+        link: 'https://www.kaggle.com/learn/python',
         description: 'Dive into Python programming with a comprehensive introduction to its powerful syntax, libraries, and applications. Perfect for beginners looking to make their mark in coding.'
     },
 
     {
         title: 'Data Analysis Fundamentals',
         icon: faChartLine,
-        link: '/courses/data-analysis',
+        link: 'https://www.kaggle.com/learn/data-visualization',
         description: 'Unlock the potential of data analysis. Learn to interpret, analyze, and visualize data using modern tools and techniques to make informed decisions.'
     },
     {
         title: 'Introduction to Bioinformatics',
         icon: faDna,
-        link: '/courses/bioinformatics',
+        link: 'https://www.coursera.org/specializations/bioinformatics',
         description: 'Explore the intersection of biology and informatics. Gain essential skills in managing and analyzing biological data for groundbreaking research in genetics and molecular biology.'
     },
     {
         title: 'Machine Learning Essentials',
         icon: faRobot,
-        link: '/courses/machine-learning',
+        link: 'https://www.kaggle.com/learn/intro-to-machine-learning',
         description: 'Step into the world of machine learning. Understand the fundamentals, algorithms, and real-world applications that empower machines to learn from data.'
     },
     {
         title: 'Data Visualization Techniques',
         icon: faChartSimple,
-        link: '/courses/data-visualization',
+        link: 'https://www.kaggle.com/learn/data-visualization',
         description: 'Bring your data to life with engaging visualizations. Learn how to communicate complex information effectively using various visualization tools and techniques.'
     },
     {
         title: 'Genomic Data Science',
         icon: faDna,
-        link: '/courses/data-science',
+        link: 'https://www.coursera.org/specializations/genomic-data-science',
         description: 'Embark on a journey through the world of genomics data science. Learn how to analyze and interpret genetic data to unlock the secrets of DNA.'
     },
     
@@ -126,7 +126,7 @@ But as we work on this, we want you to continue growing professionally. Please c
         <div className='w-full mx-auto flex flex-col gap-4'>
         {
             data.map(course => (
-                <Link to={course.link} className='w-full bg-blue-gray-50'>
+                <a href={course.link} rel="nonreferer" target='_blank' className='w-full bg-blue-gray-50'>
                 <div className='bg-blue-gray-50 p-4 flex flex-row gap-4 rounded-lg'>
                     <div className='bg-blue-gray-100 p-4 rounded-lg h-max'>
                         <FontAwesomeIcon icon={course.icon} className=' text-blue-gray-800 text-2xl' />
@@ -136,7 +136,7 @@ But as we work on this, we want you to continue growing professionally. Please c
                         <p className='font-body-plex text-blue-gray-700 text-sm'>{course.description}</p>
                     </div>
                 </div>
-                </Link>
+                </a>
             ))
         }
       <div className="flex items-center justify-center">

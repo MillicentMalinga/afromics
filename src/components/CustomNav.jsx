@@ -114,9 +114,9 @@ function CustomNav(props) {
               <span>Researchers</span>
             </Button>
             </Link>
-            <Link to="/researchers">
+            <Link to="/organisations">
             <Button fullWidth size="sm" className="bg-white font-body-plex text-blue-gray-800">
-              <span>Researchers</span>
+              <span>Organisations</span>
             </Button>
             </Link>
           </div>

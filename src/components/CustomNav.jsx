@@ -102,16 +102,18 @@ function CustomNav(props) {
                 
                 size="sm"
                 className="hidden lg:inline-block font-body-plex bg-blue-gray-500"
-                onClick={() => navigate(`${getPath("/organisations") ? "/contact" : "/organisations"}`)}
+                onClick={() => navigate('/organisations')}
+
                 
               >
-                <span>
-                  {
-                    getPath("/organisations") ? "Contact Sales" : "Organisations"
-                  }
-                </span>
+               
               </Button>
          
+            <Link to="/researchers">
+            <Button fullWidth size="sm" className="bg-white font-body-plex text-blue-gray-800">
+              <span>Researchers</span>
+            </Button>
+            </Link>
             <Link to="/researchers">
             <Button fullWidth size="sm" className="bg-white font-body-plex text-blue-gray-800">
               <span>Researchers</span>
